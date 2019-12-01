@@ -40,7 +40,7 @@ Alternatively, if you won't need to alter the large data that is passed as props
 pub struct LinkColor {
     Blue,
     Red,
-    Green
+    Green,
     Black,
     Purple,
 }
