@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Introduction](README.md)
+* [简介](README.md)
 * [Getting Started](getting-started/README.md)
   * [Build Environment](getting-started/build-environment.md)
   * [Starter Templates](getting-started/starter-templates.md)
