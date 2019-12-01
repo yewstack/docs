@@ -2,11 +2,13 @@
 description: The procedural macro for generating HTML
 ---
 
-# html!
+# html! 宏
 
-## HTML in Rust
+## 在RUST代码中使用HTML
 
-The `html!` macro allows you to write HTML in Rust, with a few extensions and modifications. It is comparable to the JSX syntax used prominently in React. 
+The `html!` 宏 允许你在Rust中使用HTML代码，并且拓展原有的HTML语法allows you to write HTML in Rust, with a few extensions and modifications. It is comparable to the JSX syntax used prominently in React. 
+
+
 
 {% hint style="info" %}
 Note that`Html<COMP>`is an alias to`VNode<COMP>`

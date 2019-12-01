@@ -1,4 +1,4 @@
-# Starter Templates
+# 初学者模板
 
 ## Project Setup for `wasm-pack`
 

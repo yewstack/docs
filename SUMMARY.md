@@ -1,4 +1,4 @@
-# 目录
+# Table of contents
 
 * [简介](README.md)
 * [从零开始](getting-started/README.md)

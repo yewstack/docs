@@ -24,7 +24,6 @@ cargo new --bin yew-app && cd yew-app
 
 {% code title="Cargo.toml" %}
 ```text
-
 [package]
 name = "yew-app"
 version = "0.1.0"
@@ -73,7 +72,7 @@ impl Component for App {
         } else {
             "Click me!"
         };
-        
+
         html! {
             <button onclick=|_| Msg::Click>{ button_text }</button>
         }
@@ -86,9 +85,9 @@ fn main() {
 ```
 {% endcode %}
 
-这份代码将构建你的称为`App` 的 `Component` 组件,  他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<Model>()` 会启动你的应用并加载到 `<body>` 标签中.
+这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<Model>()` 会启动你的应用并加载到 `<body>` 标签中.
 
-#### 运行!
+### 运行!
 
 启动并运行你的应用的最快方式就是使用 [`cargo-web`](https://github.com/koute/cargo-web) . 如果你还没有的话, 请用 `cargo install cargo-web` 命令安装.
 
