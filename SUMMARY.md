@@ -6,7 +6,7 @@
   * [初学者模板](getting-started/starter-templates.md)
   * [示例](getting-started/examples.md)
 * [html! 宏](html.md)
-* [Components](components.md)
+* [组件（Components）](components.md)
 * [Properties](properties.md)
 * [ComponentLink 和 Callbacks](componentlink.md)
 * [Agents](agents.md)

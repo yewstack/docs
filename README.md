@@ -1,6 +1,6 @@
 # 简介
 
-## What is Yew?
+## What is Yew? 
 
 **Yew** is a modern Rust framework for creating multi-threaded frontend web apps with WebAssembly.
 
