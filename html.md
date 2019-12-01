@@ -135,7 +135,9 @@ html!{
 }
 ```
 
-If the message you want your callback to return _wraps_ the argument in the closure in a tuple-variant, you can use the function tuple syntax instead, but only for `Component`s, and not for plain elements \([Issue](https://github.com/yewstack/yew/issues/733)\)
+ 如果想要回调中返回的消息将参数包装在闭包中的元组变量中，你可以使用函数元组语法。
+
+但只能对于自定义的组件这样做，而不能是一个HTML标签。\([Issue](https://github.com/yewstack/yew/issues/733)\)
 
 ```rust
 pub enum Msg {
@@ -147,7 +149,7 @@ html! {
 }
 ```
 
-This extends to the case if the argument is the same as the message you want to capture:
+作为这种情况的拓展，如果参数和你想要捕获的消息是相同的话:
 
 ```rust
 html! {
