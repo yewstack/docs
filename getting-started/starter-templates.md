@@ -1,15 +1,11 @@
 # 初学者模板
 
-## Project Setup for `wasm-pack`
-
-If you want to use a JS Bundler instead of cargo web, it is recommended that you copy from an existing template.
+## `wasm-pack`
 
 * [Minimal Template](https://github.com/yewstack/yew-wasm-pack-minimal) - Uses `wasm-pack` and `rollup` to build your application, and your own server to serve it. No bells or whistles here.
-  * `python -m SimpleHTTPServer 8080` Is a good quick and dirty server for development purposes.
-* [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template) - Webpack is used to manage your development and deployments via a `wasm-pack` plugin.
-* [Parcel Template](https://github.com/spielrs/yew-parcel-template) - Created by a community member and uses [Parcel](https://parceljs.org/)
+* [Webpack Template](https://github.com/yewstack/yew-wasm-pack-template) - Uses `wasm-pack` and the [`wasm-pack-plugin`](https://github.com/wasm-tool/wasm-pack-plugin) for Webpack to streamline development.
 
-The important distinction between this approach and using `cargo-web` is that this approach uses a `lib`, not a `bin` crate, and the entry-point to your program is annotated with a `#[wasm_bindgen]` annotation.
+The important distinction between these templates and using `cargo-web` is that this approach uses a `lib`, not a `bin` crate, and the entry-point to your program is annotated with a `#[wasm_bindgen]` annotation.
 
 Your `Cargo.toml` also should specify that you have a "cdylib" crate-type.
 
@@ -29,4 +25,10 @@ yew = "0.10.0"
 wasm-bindgen = "0.2"
 ```
 {% endcode %}
+
+## Parcel 
+
+* [Parcel Template](https://github.com/spielrs/yew-parcel-template) - Created by a community member and uses [Parcel](https://parceljs.org/)
+
+
 

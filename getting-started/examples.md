@@ -9,4 +9,3 @@ Yew 的 github 项目中就包含了各种各样的示例 \(这些项目在不�
 * **\[**Multi-threading \(Agents\)\(多线程Agent代理\)**\]\(**[https://github.com/yewstack/yew/tree/master/examples/multi\_thread](https://github.com/yewstack/yew/tree/master/examples/multi_thread)**\)**
 * **\[**Nested Components\(嵌套Component组件\)**\]\(**[https://github.com/yewstack/yew/tree/master/examples/nested\_list](https://github.com/yewstack/yew/tree/master/examples/nested_list)**\)**
 * **\[**Timer Service\(计时器\)**\]\(**[https://github.com/yewstack/yew/tree/master/examples/timer](https://github.com/yewstack/yew/tree/master/examples/timer)**\)**
-

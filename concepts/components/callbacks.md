@@ -2,7 +2,7 @@
 description: ComponentLink and Callbacks.
 ---
 
-# ComponentLink 和 Callbacks
+# Callbacks
 
 The component link is the mechanism through which component logic will register logic that can send messages to its associated component's update mechanism.
 
@@ -31,4 +31,3 @@ This might need its own short page.
 Callbacks are used to communicate with services, agents, and parent components within Yew. They are just a `Fn`wrapped by an `Rc` to allow them to be cloned.
 
 They have an `emit` function that takes their `<IN>` type as an argument and converts that to a message expected by its destination. If a callback from a parent is provided in props to a child component, the child can call `emit` on the callback in its `update` lifecycle hook to send a message back to its parent. Closures or Functions  provided as props inside the `html!` macro are automatically converted to Callbacks.
-

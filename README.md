@@ -2,55 +2,50 @@
 
 ## What is Yew? 
 
-**Yew** is a modern Rust framework for creating multi-threaded frontend web apps with WebAssembly.
+**Yew** is a modern [Rust](https://www.rust-lang.org/) framework for creating multi-threaded front-end web apps with [WebAssembly](https://webassembly.org/).
 
-### Architecture
+* It features a **component-based** framework which makes it easy to create interactive UIs. Developers who have experience with frameworks like [React](https://reactjs.org/) and [Elm](https://elm-lang.org/) should feel quite at home when using Yew.
+* It has **great performance** by minimizing DOM API calls by helping developers easily offload processing to background web workers. 
+* It supports **JavaScript interoperability**, allowing developers to leverage NPM packages and integrate with existing JavaScript applications.
 
-Yew's architecture is heavily inspired by Elm and React. The basic building block of a Yew app is called a `Component`. Each `Component` stores its own state, expresses how to render that state to HTML, and chooses how to respond to asynchronous updates. Yew maintains an internal "virtual DOM" in order to minimize the patches needed to update the browser page DOM for each re-render of a `Component`.
+### Join Us 😊 
 
-### Concurrency
+* You can report bugs and discuss features on the [GitHub issues page](https://github.com/yewstack/yew/issues)
+* We ❤️pull requests. Check out [good first issues](https://github.com/yewstack/yew/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) if you'd like to help out!
+* Our [Gitter chatroom](https://gitter.im/yewframework/Lobby) is pretty active and is a great place to ask questions
 
-Yew was built before the standardization of async-await and has promoted the use of the [actor model](https://en.wikipedia.org/wiki/Actor_model) of concurrency. This model will feel very natural if you choose to write the server side of your application with [actix-web](https://github.com/actix/actix-web). In Yew, an actor is called an `Agent`. Using agents, a Yew application can delegate tasks to worker threads using Web Workers and subscribe to async messages from those agents.
+![Our community is thriving!](https://img.shields.io/github/stars/yewstack/yew?color=009A5B&label=Github%20stars)
 
-An alternative approach is using futures which are can be leveraged through the [wasm-bindgen-futures](https://rustwasm.github.io/wasm-bindgen/api/wasm_bindgen_futures/) crate which bridges Rust futures to JS Promises. An example project using futures and async-await can be found [here](https://github.com/yewstack/yew/tree/master/examples/futures).
+### Ready to dive in?
 
-### Safety
+Click the link below to learn how to build your first Yew app and learn from community example projects
 
-Rust helps developers write safer code. For example, in JavaScript, an uncaught error can cause serious problems in your application. Rust encourages proper error handling and you can even get stacktraces for your Rust code with the [`console_error_panic_hook`](https://github.com/rustwasm/console_error_panic_hook) crate. Also, Yew apps can leverage Rust's static typing to ensure that your `Component` receives the correct properties for creation \(otherwise your app won't compile!\).
+{% page-ref page="getting-started/getting-started.md" %}
 
-### JavaScript  
+### \*\*\*\*
 
-Yew is built on top of great web tooling like `wasm-bindgen` and `stdweb` and will be supporting `web-sys` and `js-sys` in the near future. These crates enable WebAssembly code to call into JavaScript and vice-versa. For some examples, visit [here](https://github.com/yewstack/yew/tree/master/examples/js_callback) to see how to leverage `stdweb` to write JavaScript code in your Rust app and [here](https://github.com/yewstack/yew/tree/master/examples/npm_and_rest) for how to interact with an NPM module.
+### **Still not convinced?**
 
-### HTML
+This project is built on cutting edge technology and is great for developers who like to develop the foundational projects of tomorrow. Here are some reasons why we believe that frameworks like Yew are the future of web development. 
 
-Yew includes a procedural macro for generating HTML. It closely resembles React's JSX with some exceptions _\(string literals and listener callbacks to name a few\)_. Here is a quick look at its usage:
+#### **Wait, why WebAssembly?**
 
-```rust
-html! {
-    <section class="todoapp">
-        <header class="header">
-            <h1>{ "todos" }</h1>
-            { self.view_input(&model) }
-        </header>
-        <section class="main">
-            { self.view_entries(&model) }
-        </section>
-    </section>
-}
-```
+WebAssembly _\(Wasm\)_ is a portable low-level language that Rust can compile into. It runs at native speeds in the browser and is interoperable with JavaScript and supported in all major browsers. For more ideas on how to get the most out of WebAssembly, check out this list of [Use Cases](https://webassembly.org/docs/use-cases/).
 
-Full guide [here](html.md)
+It should be noted that using Wasm is not \(yet\) a silver bullet for improving the performance of a web app. As of right now, using DOM APIs from WebAssembly is still slower than calling them directly from JavaScript. This is a temporary hurdle which the [WebAssembly Interface Types](https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md) proposal aims to resolve. If you would like to learn more, check out this [excellent article](https://hacks.mozilla.org/2019/08/webassembly-interface-types/) from Mozilla.
 
-### Why Rust?
+#### Ok, but why Rust?
 
-Rust is a modern systems language pursuing safety, concurrency, and speed and has been voted the most loved programming languages [multiple](https://insights.stackoverflow.com/survey/2018#technology-_-most-loved-dreaded-and-wanted-languages) [years](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-languages) in a row in Stack Overflow Developer Surveys. Rust can be compiled to WebAssembly using the `cargo` build system which can achieve near-native speeds in a browser.
+Rust is blazing fast and reliable with its rich type system and ownership model. It has a tough learning curve but is well worth the effort. Rust has been voted the most loved programming language in Stack Overflow's Developer Surveys for both [2018](https://insights.stackoverflow.com/survey/2018#technology-_-most-loved-dreaded-and-wanted-languages) and [2019](https://insights.stackoverflow.com/survey/2019#technology-_-most-loved-dreaded-and-wanted-languages).
 
-Similar to how Node.js web applications can share JavaScript code between the server and client, Rust-based apps can reuse the same Rust code for the server and client, with the client code first needing to be compiled to WebAssembly for execution in a browser.
+Rust also helps developers write safer code with its rich type system and ownership model. Say goodbye to hard to track down race condition bugs in JavaScript! In fact, with Rust, most of your bugs will be caught by the compiler before your app even runs. And don't worry, when your app does run into an error, you can still get full stack-traces for your Rust code in the browser console.
 
-### Why WebAssembly?
+#### Alternatives?
 
-First of all, using WASM is not going to be faster than a JavaScript app if you're primarily using DOM APIs. This will probably change in the near future, with the adoption of [Web IDL](https://heycam.github.io/webidl/). But for the time being, Wasm applications have to serialize commands from Wasm to JavaScript to interact with the DOM which will impact performance.
+We love to share ideas with other projects and believe we can all help each other reach the full potential of this exciting new technology. If you're not into Yew, you may like the following projects \(listed alphabetically\)
 
-That being said, WebAssembly can be leveraged for data heavy and graphics intensive calculations in the background. When client UI performance is not too important \(internal tooling, for example\) using WebAssembly for the full web application can be acceptable.
+* [Draco](https://github.com/utkarshkukreti/draco) - _"A Rust library for building client side web applications with Web Assembly"_
+* [Percy](https://github.com/chinedufn/percy) - _"A modular toolkit for building isomorphic web apps with Rust + WebAssembly"_
+* [Seed](https://github.com/seed-rs/seed) - _"A Rust framework for creating web apps"_
+* [Smithy](https://github.com/rbalicki2/smithy) - _"A framework for building WebAssembly apps in Rust"_
 
