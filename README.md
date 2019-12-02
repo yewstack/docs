@@ -22,7 +22,7 @@ Click the link below to learn how to build your first Yew app and learn from com
 
 {% page-ref page="cong-ling-kai-shi/getting-started.md" %}
 
-### \*\*\*\*
+
 
 ### **Still not convinced?**
 
