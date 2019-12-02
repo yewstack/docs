@@ -11,7 +11,7 @@ Your `Cargo.toml` also should specify that you have a "cdylib" crate-type.
 
 {% code title="Cargo.toml" %}
 ```text
-[package]
+[package]
 name = "yew-app"
 version = "0.1.0"
 authors = ["Yew App Developer <name@example.com>"]
@@ -26,9 +26,7 @@ wasm-bindgen = "0.2"
 ```
 {% endcode %}
 
-## Parcel 
+## Parcel
 
 * [Parcel Template](https://github.com/spielrs/yew-parcel-template) - Created by a community member and uses [Parcel](https://parceljs.org/)
-
-
 

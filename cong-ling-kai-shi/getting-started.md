@@ -4,11 +4,11 @@ description: Set yourself up for success
 
 # 安装
 
-### Rust
+## Rust
 
-首先, 你需要安装 Rust. To install Rust and the `cargo` build tool, follow the ****[**official instructions**](https://www.rust-lang.org/tools/install)**.**
+首先, 你需要安装 Rust. To install Rust and the `cargo` build tool, follow the **\*\*\[**official instructions**\]\(**[https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install)**\)**.\*\*
 
-### **Build Tools**
+## **Build Tools**
 
 [**`wasm-pack`**](https://rustwasm.github.io/docs/wasm-pack/) is a tool developed by the Rust-Wasm working group and is the **recommended** tool for building your application. Install using the official [**install instructions**](https://rustwasm.github.io/wasm-pack/installer/)**.**
 
@@ -17,3 +17,4 @@ description: Set yourself up for success
 ```bash
 cargo install cargo-web
 ```
+

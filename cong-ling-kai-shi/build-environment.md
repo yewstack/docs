@@ -2,7 +2,7 @@
 
 ## Build Tools
 
-You actually don't need extra build tools to release a Yew application but we recommend them. They make deployment and packaging much less of a headache by generating all of the wrapper JavaScript code necessary to run the `.wasm` file from you app in the browser. 
+You actually don't need extra build tools to release a Yew application but we recommend them. They make deployment and packaging much less of a headache by generating all of the wrapper JavaScript code necessary to run the `.wasm` file from you app in the browser.
 
 You can check out the [Starter Templates](starter-templates.md) to get up and running quickly or read on to learn more about your options.
 
@@ -20,7 +20,7 @@ Note that the crate-type in your `Cargo.toml` will need to be `cdylib`when using
 cargo install wasm-pack
 ```
 
-#### Build
+### Build
 
 This command will produce a bundle in the `./pkg` directory with your app's compiled WebAssembly along with a JavaScript wrapper which can be used to start your application.
 
@@ -28,7 +28,7 @@ This command will produce a bundle in the `./pkg` directory with your app's comp
 wasm-pack build
 ```
 
-#### Bundle
+### Bundle
 
 For more information on Rollup visit this [guide](https://rollupjs.org/guide/en/#quick-start)
 
@@ -36,7 +36,7 @@ For more information on Rollup visit this [guide](https://rollupjs.org/guide/en/
 rollup ./main.js --format iife --file ./pkg/bundle.js
 ```
 
-#### Serve
+### Serve
 
 Feel free to use your preferred server. Here we use a simple python server to serve to [http://\[::1\]:8000](http://[::1]:8000).
 
@@ -44,7 +44,7 @@ Feel free to use your preferred server. Here we use a simple python server to se
 python -m SimpleHTTPServer 8080
 ```
 
-#### Supported Targets
+### Supported Targets
 
 * `wasm32-unknown-unknown`
 
@@ -58,19 +58,19 @@ Cargo web is a cargo subcommand for building client web apps. It makes building 
 cargo install cargo-web
 ```
 
-#### Build
+### Build
 
 ```bash
 cargo web build
 ```
 
-#### Run
+### Run
 
 ```bash
 cargo web start
 ```
 
-#### Supported Targets
+### Supported Targets
 
 * `wasm32-unknown-unknown`
 * `wasm32-unknown-emscripten`

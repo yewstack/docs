@@ -73,7 +73,7 @@ fn main() {
 
 这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<Model>()` 会启动你的应用并加载到 `<body>` 标签中.
 
-### 运行!
+## 运行!
 
 启动并运行你的应用的最快方式就是使用 [`cargo-web`](https://github.com/koute/cargo-web) . 如果你还没有的话, 请用 `cargo install cargo-web` 命令安装.
 
@@ -84,3 +84,4 @@ cargo web start
 ```
 
 `cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 目标代码, 然后构建你的应用, 你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问. 可以通过 `cargo web start --help` 命令来获取更多选项和帮助.
+

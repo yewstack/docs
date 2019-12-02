@@ -18,5 +18,3 @@ The `html!` macro allows you to write declarative HTML and SVG for your componen
 
 {% page-ref page="literals-and-expressions.md" %}
 
-
-

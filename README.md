@@ -1,6 +1,6 @@
 # 简介
 
-## What is Yew? 
+## What is Yew?
 
 **Yew** is a modern [Rust](https://www.rust-lang.org/) framework for creating multi-threaded front-end web apps with [WebAssembly](https://webassembly.org/).
 
@@ -8,7 +8,7 @@
 * It has **great performance** by minimizing DOM API calls by helping developers easily offload processing to background web workers. 
 * It supports **JavaScript interoperability**, allowing developers to leverage NPM packages and integrate with existing JavaScript applications.
 
-### Join Us 😊 
+### Join Us 😊
 
 * You can report bugs and discuss features on the [GitHub issues page](https://github.com/yewstack/yew/issues)
 * We ❤️pull requests. Check out [good first issues](https://github.com/yewstack/yew/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) if you'd like to help out!
@@ -20,13 +20,13 @@
 
 Click the link below to learn how to build your first Yew app and learn from community example projects
 
-{% page-ref page="getting-started/getting-started.md" %}
+{% page-ref page="cong-ling-kai-shi/getting-started.md" %}
 
 ### \*\*\*\*
 
 ### **Still not convinced?**
 
-This project is built on cutting edge technology and is great for developers who like to develop the foundational projects of tomorrow. Here are some reasons why we believe that frameworks like Yew are the future of web development. 
+This project is built on cutting edge technology and is great for developers who like to develop the foundational projects of tomorrow. Here are some reasons why we believe that frameworks like Yew are the future of web development.
 
 #### **Wait, why WebAssembly?**
 

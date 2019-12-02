@@ -4,7 +4,7 @@ description: Both HTML and SVG elements are supported
 
 # Elements
 
-### Tag Structure
+## Tag Structure
 
 Element tags must either self-close `<... />` or have a corresponding close tag for each open tag
 
@@ -46,7 +46,7 @@ html! {
 For convenience, elements which _usually_ require a closing tag are **allowed** to self-close. For example, writing `html! { <div class="placeholder" /> }` is valid.
 {% endhint %}
 
-### Children
+## Children
 
 Create complex nested HTML and SVG layouts with ease:
 
@@ -95,7 +95,7 @@ html! {
 {% endtab %}
 {% endtabs %}
 
-### Classes
+## Classes
 
 There are a number of convenient options for specifying classes for an element:
 
@@ -149,7 +149,7 @@ html! {
 {% endtab %}
 {% endtabs %}
 
-### Listeners
+## Listeners
 
 Listener attributes need to be passed a `Callback` which is a wrapper around a closure. How you create your callback depends on how you wish your app to react to a listener event:
 
@@ -247,7 +247,7 @@ impl Component for MyComponent {
         let click_callback = Callback::from(|| {
             ConsoleService::new().log("clicked!");
         });
-        
+
         html! {
             <button onclick=click_callback>
                 { "Click me!" }
@@ -259,7 +259,7 @@ impl Component for MyComponent {
 {% endtab %}
 {% endtabs %}
 
-### Listeners Continued...
+## Listeners Continued...
 
 Closures declared _within_ a `html!` macro are automatically converted to `Callbacks`. These callbacks will return messages to the component. The Yew framework will likely discontinue this syntax in the future and do not recommend its usage.
 
@@ -272,6 +272,4 @@ html!{
     <button onclick=|_| Msg::Click>{ "Click Me!" }</button>
 }
 ```
-
-### 
 

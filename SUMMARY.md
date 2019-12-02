@@ -4,11 +4,11 @@
 
 ## 从零开始
 
-* [安装](getting-started/getting-started.md)
-* [基本应用](getting-started/build-a-sample-app.md)
-* [构建初始环境](getting-started/build-environment.md)
-* [初学者模板](getting-started/starter-templates.md)
-* [示例](getting-started/examples.md)
+* [安装](cong-ling-kai-shi/getting-started.md)
+* [基本应用](cong-ling-kai-shi/build-a-sample-app.md)
+* [构建初始环境](cong-ling-kai-shi/build-environment.md)
+* [初学者模板](cong-ling-kai-shi/starter-templates.md)
+* [示例](cong-ling-kai-shi/examples.md)
 
 ## Core Concepts <a id="concepts"></a>
 
@@ -35,3 +35,4 @@
 * [Testing](more/testing.md)
 * [External Libs](more/external-libs.md)
 * [web-sys](more/web-sys.md)
+
