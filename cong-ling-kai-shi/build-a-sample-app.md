@@ -83,5 +83,5 @@ fn main() {
 cargo web start
 ```
 
-`cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 目标代码, 然后构建你的应用, 你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问. 可以通过 `cargo web start --help` 命令来获取更多选项和帮助.
+`cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 作为目标代码, 然后构建你的应用, 你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问. 可以通过 `cargo web start --help` 命令来获取更多选项和帮助.
 

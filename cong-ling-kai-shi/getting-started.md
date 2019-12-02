@@ -6,7 +6,7 @@ description: Set yourself up for success
 
 ## Rust
 
-首先, 你需要安装 Rust. To install Rust and the `cargo` build tool, follow the [**official instructions**](https://www.rust-lang.org/tools/install).
+首先, 你需要安装 Rust. 为了 To install Rust and the `cargo` build tool, follow the [**official instructions**](https://www.rust-lang.org/tools/install).
 
 ## **Build Tools**
 
