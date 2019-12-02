@@ -5,7 +5,7 @@
 ## 从零开始
 
 * [安装](cong-ling-kai-shi/getting-started.md)
-* [基本应用](cong-ling-kai-shi/build-a-sample-app.md)
+* [第一个简单的App](cong-ling-kai-shi/build-a-sample-app.md)
 * [构建初始环境](cong-ling-kai-shi/build-environment.md)
 * [初学者模板](cong-ling-kai-shi/starter-templates.md)
 * [示例](cong-ling-kai-shi/examples.md)
