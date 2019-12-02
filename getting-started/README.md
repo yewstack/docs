@@ -1,41 +1,41 @@
 ---
-description: How to set up and build your app
+描述: 如何配置和构建你的应用
 ---
 
-# Getting Started
+# 从零开始
 
-## Installation
+## 安装
 
-First, you'll need to install Rust. You can follow the official instructions [here](https://www.rust-lang.org/tools/install). Next, we'll be using `cargo-web` to create a sample app. You can install it by running:
+首先, 你需要安装 Rust. 你可以按照官方的[教程](https://www.rust-lang.org/tools/install)进行安装. 接下来，我们可以使用 `cargo-web` 命令来创建一个基本的应用. 你可以执行下面的代码来安装 cargo-web:
 
 ```bash
 cargo install cargo-web
 ```
 
-## Quick Sample App
+## 基本应用
 
-First create a new binary project:
+首先创建一个二进制项目:
 
 ```bash
 cargo new --bin yew-app && cd yew-app
 ```
 
-Add yew to your dependencies \(refer [here](https://docs.rs/yew) for the latest version\)
+添加 yew 到你的依赖库中 \([这里](https://docs.rs/yew) 可以下载到最新版本的 yew\)
 
 {% code title="Cargo.toml" %}
 ```text
-[package]
+[package]
 name = "yew-app"
 version = "0.1.0"
 authors = ["Yew App Developer <name@example.com>"]
 edition = "2018"
 
 [dependencies]
-yew = "0.10.0" # <-- 
+yew = "0.10.0"
 ```
 {% endcode %}
 
-Copy this template into your `src/main.rs` file:
+将这份代码复制到你的 `src/main.rs` 文件中:
 
 {% code title="src/main.rs" %}
 ```rust
@@ -54,7 +54,7 @@ impl Component for App {
     type Properties = ();
 
     fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
-        Model { clicked: false }
+        App { clicked: false }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -72,7 +72,7 @@ impl Component for App {
         } else {
             "Click me!"
         };
-        
+
         html! {
             <button onclick=|_| Msg::Click>{ button_text }</button>
         }
@@ -85,15 +85,17 @@ fn main() {
 ```
 {% endcode %}
 
-This template sets up your root `Component`, called `App` which shows a button which updates itself when you click it. `yew::start_app::<Model>()` starts your app and mounts it to the page's `<body>` tag.
+这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<Model>()` 会启动你的应用并加载到 `<body>` 标签中.
 
-#### Run your App!
+### 运行!
 
-Using [`cargo-web`](https://github.com/koute/cargo-web) is the quickest way to get up and running. If you haven't already, install the tool with `cargo install cargo-web` and then build and start a development server by running:
+启动并运行你的应用的最快方式就是使用 [`cargo-web`](https://github.com/koute/cargo-web) . 如果你还没有的话, 请用 `cargo install cargo-web` 命令安装.
+
+运行一个用于开发的服务器来执行你的程序:
 
 ```bash
 cargo web start
 ```
 
-`cargo-web` should automatically add the `wasm32-unknown-unknown` target for you and then will build your app and make your application available at [http://\[::1\]:8000](http://[::1]:8000) by default. Consult `cargo web start --help` for other options.
+`cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 目标代码, 然后构建你的应用, 你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问. 可以通过 `cargo web start --help` 命令来获取更多选项和帮助.
 
