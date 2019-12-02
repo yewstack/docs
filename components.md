@@ -2,7 +2,7 @@
 description: Components and their lifecycle hooks
 ---
 
-# 组件（Components）
+# Components
 
 ## What are Components?
 

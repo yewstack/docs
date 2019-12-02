@@ -2,32 +2,32 @@
 description: The procedural macro for generating HTML
 ---
 
-# html! 宏
+# html!
 
-## 在RUST中使用HTML
+## HTML in Rust
 
-`html!` 宏 允许你在Rust中使用HTML代码，并且修改并且拓展原有的HTML语法，这和在React中广泛使用的JSX语法有些相似。
+The `html!` macro allows you to write HTML in Rust, with a few extensions and modifications. It is comparable to the JSX syntax used prominently in React. 
 
 {% hint style="info" %}
-`注：Html<COMP> 是 VNode<COMP> 的别名`
+Note that`Html<COMP>`is an alias to`VNode<COMP>`
 {% endhint %}
 
-### 空标签
+### Fragments
 
-`html!` 宏总是要求单个HTML标签作为根节点。接下来的一些例子，都会让编译器抛出错误： `error: only one root html element allowed`
+The `html!` macro always requires a single root node. The following example will produce the following compiler message: `error: only one root html element allowed`
 
 ```rust
-// 错误
+// INVALID
 html! {
     <div></div>
     <p></p>
 }
 ```
 
-为了解决这个问题，Yew允许使用空标签，使用  `<></>` 来定义。可以在 `html!` 宏中 使用空标签来作为一系列的HTML标签的根标签。
+To work around this, Yew allows the use of fragments, which use `<></>` syntax, to denote a list of items as the top level of a `html!` macro.
 
 ```rust
-// 正确
+// VALID
 html! {
     <>
         <div></div>
@@ -36,13 +36,13 @@ html! {
 }
 ```
 
-### HTML标签
+### Elements
 
-HTML标签的写法与HTML标准或是SVG标准大致符合，有少许的不同。例如，在宏中，一个HTML标签要么是自闭合的标签
+Elements are required to roughly follow the standard HTML or SVG syntax with some variations. For example, element tags must either self-close...
 
 ```rust
 html! {
-    // 错误 (没有自闭合标签)
+    // INVALID (MISSING SELF-CLOSE)
     <input id="my_input">
 }
 
@@ -52,7 +52,7 @@ html! {
 }
 ```
 
-或者是一个开始标签，但是一定要有与之相对应的结束标签。
+Or open tags must have a corresponding close tag:
 
 ```rust
 html! {
@@ -66,9 +66,9 @@ html! {
 }
 ```
 
-### 表达式
+### Expressions
 
-你可以在HTML中使用 `{}` 块来插入Rust表达式，只要这些表达式最终可以被解析成`Html<_>`
+You can insert expressions in your HTML using `{}` blocks, as long as they resolve to `Html<_>`
 
 ```rust
 html! {
@@ -86,7 +86,7 @@ html! {
 }
 ```
 
-通常我们会把这些表达式写进函数或者闭包中来增加可读性和可维护性。
+It often makes sense to extract these expressions into functions or closures to optimize for readability:
 
 ```rust
 let show_link = true;
@@ -105,11 +105,11 @@ html! {
 }
 ```
 
-### 常量
+### Literals
 
-如果一个表达式的类型本身实现了 `Display` （一个标准库中的Trait），他们将会被转化成字符串并且作为一个Text节点插入DOM树中。
+If expressions resolve to types that implement `Display`,  they will be converted to strings and inserted into the DOM as a [Text](https://developer.mozilla.org/en-US/docs/Web/API/Text) node. 
 
-所有的需要显示的文本必须被 `{}` 块包含，因为这些文本应该被认为是一个Rust的表达式来处理。这一点上，Yew中使用HTML的方式和正常HTML语法有巨大的区别。
+All display text must be enclosed by `{}` blocks because text is handled like an expression. This is the largest deviation from normal HTML syntax that Yew makes.
 
 ```rust
 let text = "lorem ipsum";
@@ -121,9 +121,9 @@ html!{
 }
 ```
 
-### 回调
+### Callbacks
 
-声明在`html!` 宏中的闭包自动的被认为是回调`Callbacks`。回调`Callbacks`，会将信息返回给所属的组件，他们通常用来接收来自子组件的信息，或者是处理像是 `input`和 `button`的HTML标签的事件。
+Closures declared _within_ a `html!` macro are automatically converted to `Callbacks`. Callbacks will return messages to the component. They are used for receiving messages from child components, and for handling events from HTML elements like `input`s and `button`s.
 
 ```rust
 pub enum Msg {
@@ -135,9 +135,7 @@ html!{
 }
 ```
 
- 如果想要回调中返回的消息将参数包装在闭包中的元组变量中，你可以使用函数元组语法。
-
-但只能对于自定义的组件这样做，而不能是一个HTML标签。\([Issue](https://github.com/yewstack/yew/issues/733)\)
+If the message you want your callback to return _wraps_ the argument in the closure in a tuple-variant, you can use the function tuple syntax instead, but only for `Component`s, and not for plain elements \([Issue](https://github.com/yewstack/yew/issues/733)\)
 
 ```rust
 pub enum Msg {
@@ -149,11 +147,11 @@ html! {
 }
 ```
 
-作为这种情况的拓展，如果参数和你想要捕获的消息是相同的话:
+This extends to the case if the argument is the same as the message you want to capture:
 
 ```rust
 html! {
-    <ButtonComponent callback=From::from></ButtonComponent>
+    <ButtonComponent callback=From::from></button>
 }
 
 // or
@@ -162,7 +160,9 @@ html! {
 }
 ```
 
-### 组件
+### Components
 
-阅读下面的章节，来学习如何更好的在 `html!` 中使用组件。
+See the following section on ways to use components in the `html!` macro.
+
+
 
