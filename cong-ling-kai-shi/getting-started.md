@@ -6,13 +6,17 @@ description: Set yourself up for success
 
 ## Rust
 
-首先, 你需要安装 Rust. 为了 To install Rust and the `cargo` build tool, follow the [**official instructions**](https://www.rust-lang.org/tools/install).
+首先 ，你需要安装 Rust 。
 
-## **Build Tools**
+如何安装 Rust 和 `cargo` 工具链, 请参考 [**official instructions**](https://www.rust-lang.org/tools/install).
 
-[**`wasm-pack`**](https://rustwasm.github.io/docs/wasm-pack/) is a tool developed by the Rust-Wasm working group and is the **recommended** tool for building your application. Install using the official [**install instructions**](https://rustwasm.github.io/wasm-pack/installer/)**.**
+## **开发工具**
 
-[**`cargo-web`**](https://github.com/koute/cargo-web) was the preferred web workflow tool before the introduction of `wasm-pack`. It is still the **quickest** way to get up and running and worth installing to run examples that haven't been migrated to support `wasm-pack` yet. Install it by running:
+[**`wasm-pack`**](https://rustwasm.github.io/docs/wasm-pack/) 是一个由Rust-Wasm 小组开发，并且作为开发应用的**推荐工具**，参考官方的 [**install instructions**](https://rustwasm.github.io/wasm-pack/installer/) 来进行安装。
+
+[**`cargo-web`**](https://github.com/koute/cargo-web) 是 `wasm-pack`  出现之前的首选开发工具，它现在仍然是让你的应用运行起来的 **最快** 的方式。并且很多示例项目还没有迁移到 `wasm-pack` 上，这点上看，它也是值得一试的。 
+
+通过键入下列命令来安装：
 
 ```bash
 cargo install cargo-web
