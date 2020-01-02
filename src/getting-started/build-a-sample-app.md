@@ -71,7 +71,37 @@ fn main() {
 ```
 {% endcode %}
 
-This template sets up your root `Component`, called `App` which shows a button which updates itself when you click it. Take special note of `yew::start_app::<Model>()` which starts your app and mounts it to the page's `<body>` tag.
+This template sets up your root `Component`, called `App` which shows a button which updates itself when you click it. Take special note of `yew::start_app::<Model>()` which starts your app and mounts it to the page's `<body>` tag. If you would like to start your application with any dynamic properties, you can instead use:
+
+{% code title="src/main.rs" %}
+```rust
+
+struct App {
+    api_base: String
+}
+
+struct Properties {
+    api_base: String
+}
+
+impl Component for App {
+    // ...
+    type Properties = Properties;
+
+    fn create(props: Self::Properties, _: ComponentLink<Self>) -> Self {
+        App { api_base: props.api_base }
+    }
+    
+    // ...
+}
+
+fn main() {
+    yew::start_app_with_props::<App>(Properties { 
+        api_url: "localhost:8080".into(),
+    });
+}
+```
+{% endcode %}
 
 ### Run your App!
 
