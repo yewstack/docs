@@ -2,7 +2,7 @@
 
 ## Build Tools
 
-You actually don't need extra build tools to release a Yew application but we recommend them. They make deployment and packaging much less of a headache by generating all of the wrapper JavaScript code necessary to run the `.wasm` file from you app in the browser.
+You actually don't need extra build tools to release a Yew application but we recommend them. They make deployment and packaging much less of a headache by generating all of the wrapper JavaScript code necessary to run the `.wasm` file from your app in the browser.
 
 You can check out the [Starter Templates](starter-templates.md) to get up and running quickly or read on to learn more about your options.
 
