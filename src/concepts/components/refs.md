@@ -24,3 +24,5 @@ html! {
 // In update
 let has_attributes = self.node_ref.try_into::<Element>().has_attributes();
 ```
+
+> ⚠️ **Do not bring the `stdweb::unstable::TryInto` trait into scope, it will overwrite `.try_into` and cause type errors**
