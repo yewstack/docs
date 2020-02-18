@@ -78,7 +78,7 @@ This template sets up your root `Component`, called `App` which shows a button t
 Using [`cargo-web`](https://github.com/koute/cargo-web) is the quickest way to get up and running. If you haven't already, install the tool with `cargo install cargo-web` and then build and start a development server by running:
 
 ```bash
-cargo web start
+cargo-web start
 ```
 
 `cargo-web` will automatically add the `wasm32-unknown-unknown` target for you, build your app, and finally make it available at [http://\[::1\]:8000](http://[::1]:8000) by default. Consult `cargo web start --help` for other options.
