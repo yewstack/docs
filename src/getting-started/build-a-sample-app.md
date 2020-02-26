@@ -17,7 +17,7 @@ authors = ["Yew App Developer <name@example.com>"]
 edition = "2018"
 
 [dependencies]
-yew = "0.10.0"
+yew = "0.11.0"
 ```
 {% endcode %}
 
@@ -25,10 +25,11 @@ yew = "0.10.0"
 
 {% code title="src/main.rs" %}
 ```rust
-use yew::{html, Component, ComponentLink, Html, ShouldRender};
+use yew::{html, Callback, ClickEvent, Component, ComponentLink, Html, ShouldRender};
 
 struct App {
     clicked: bool,
+    onclick: Callback<ClickEvent>,
 }
 
 enum Msg {
@@ -39,8 +40,11 @@ impl Component for App {
     type Message = Msg;
     type Properties = ();
 
-    fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
-        App { clicked: false }
+    fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
+        App {
+            clicked: false,
+            onclick: link.callback(|_| Msg::Click),
+        }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -52,15 +56,11 @@ impl Component for App {
         }
     }
 
-    fn view(&self) -> Html<Self> {
-        let button_text = if self.clicked {
-            "Clicked!"
-        } else {
-            "Click me!"
-        };
+    fn view(&self) -> Html {
+        let button_text = if self.clicked { "Clicked!" } else { "Click me!" };
 
         html! {
-            <button onclick=|_| Msg::Click>{ button_text }</button>
+            <button onclick=&self.onclick>{ button_text }</button>
         }
     }
 }
@@ -71,7 +71,7 @@ fn main() {
 ```
 {% endcode %}
 
-这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<Model>()` 会启动你的应用并加载到 `<body>` 标签中.
+这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<App>()` 会启动你的应用并加载到 `<body>` 标签中. If you would like to start your application with any dynamic properties, you can instead use `yew::start_app_with_props(..)`.
 
 ## 运行!
 

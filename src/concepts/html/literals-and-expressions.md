@@ -19,7 +19,7 @@ html!{
 
 ## Expressions
 
-You can insert expressions in your HTML using `{}` blocks, as long as they resolve to `Html<_>`
+You can insert expressions in your HTML using `{}` blocks, as long as they resolve to `Html`
 
 ```rust
 html! {
@@ -41,7 +41,7 @@ It often makes sense to extract these expressions into functions or closures to 
 
 ```rust
 let show_link = true;
-let maybe_display_link = move || -> Html<MyComponent> {
+let maybe_display_link = move || -> Html {
   if show_link {
     html! {
       <a href="https://example.com">{"Link"}</a>
