@@ -1,4 +1,4 @@
-# 第一个简单的App
+# 第一个简单的 App
 
 首先创建一个二进制项目:
 
@@ -6,7 +6,7 @@
 cargo new --bin yew-app && cd yew-app
 ```
 
-添加 `yew` 到你的依赖库中 \([这里](https://docs.rs/yew) 可以查看最新版本的 Yew\)
+添加 `yew` 到你的依赖库中（[这里](https://docs.rs/yew) 可以查看最新版本的 Yew）
 
 {% code title="Cargo.toml" %}
 ```text
