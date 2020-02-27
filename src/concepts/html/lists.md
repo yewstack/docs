@@ -5,7 +5,7 @@
 `html!` 宏总是要求一个单一的根节点。为了绕开这个限制，把内容包裹在一个空标签内是有效的：
 
 {% tabs %}
-{% tab title="Valid" %}
+{% tab title="有效" %}
 ```rust
 html! {
     <>
@@ -16,7 +16,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="Invalid" %}
+{% tab title="无效" %}
 ```rust
 /* 错误：只允许一个 html 根元素 */
 

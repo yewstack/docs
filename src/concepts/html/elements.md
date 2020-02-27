@@ -193,7 +193,7 @@ impl Component for MyComponent {
 ```
 {% endtab %}
 
-{% tab title="Agent Handler" %}
+{% tab title="Agent 处理器" %}
 ```rust
 struct MyComponent {
     worker: Dispatcher<MyWorker>,
