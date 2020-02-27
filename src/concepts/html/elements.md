@@ -1,15 +1,15 @@
 ---
-description: Both HTML and SVG elements are supported
+description: HTML 和 SVG 元素均受支持
 ---
 
-# Elements
+# 元素
 
-## Tag Structure
+## 标签结构
 
-Element tags must either self-close `<... />` or have a corresponding close tag for each open tag
+元素标签必须是自闭合的 `<... />`，或是每个标签都有一个对应的闭合标签。
 
 {% tabs %}
-{% tab title="Open - Close" %}
+{% tab title="标签 - 闭合标签" %}
 ```rust
 html! {
   <div id="my_div"></div>
@@ -17,7 +17,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="INVALID" %}
+{% tab title="无效" %}
 ```rust
 html! {
   <div id="my_div"> // <- MISSING CLOSE TAG
@@ -25,7 +25,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="Self-Closing" %}
+{% tab title="自闭合" %}
 ```rust
 html! {
   <input id="my_input" />
@@ -33,7 +33,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="INVALID" %}
+{% tab title="无效" %}
 ```rust
 html! {
   <input id="my_input"> // <- MISSING SELF-CLOSE
@@ -43,12 +43,12 @@ html! {
 {% endtabs %}
 
 {% hint style="info" %}
-For convenience, elements which _usually_ require a closing tag are **allowed** to self-close. For example, writing `html! { <div class="placeholder" /> }` is valid.
+为方便起见，一些 _通常_ 需要闭合标签的元素是被**允许**自闭合的。例如，`html! { <div class="placeholder" /> }` 这样写是有效的。
 {% endhint %}
 
 ## Children
 
-Create complex nested HTML and SVG layouts with ease:
+轻松创建复杂的嵌套 HTML 和 SVG 布局：
 
 {% tabs %}
 {% tab title="HTML" %}
@@ -97,10 +97,10 @@ html! {
 
 ## Classes
 
-There are a number of convenient options for specifying classes for an element:
+有许多方便的选项可用于元素指定 classes：
 
 {% tabs %}
-{% tab title="Literal" %}
+{% tab title="常量" %}
 ```rust
 html! {
   <div class="container"></div>
@@ -108,7 +108,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="Multiple" %}
+{% tab title="多个属性" %}
 ```rust
 html! {
   <div class="container center-align"></div>
@@ -116,7 +116,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="Interpolated" %}
+{% tab title="插值" %}
 ```rust
 html! {
   <div class=format!("{}-container", size)></div>
@@ -124,7 +124,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="Expression" %}
+{% tab title="表达式" %}
 ```rust
 html! {
   <div class=self.classes()></div>
@@ -132,7 +132,7 @@ html! {
 ```
 {% endtab %}
 
-{% tab title="List" %}
+{% tab title="元组" %}
 ```rust
 html! {
   <div class=("class-1", "class-2")></div>
@@ -149,12 +149,12 @@ html! {
 {% endtab %}
 {% endtabs %}
 
-## Listeners
+## 监听器
 
-Listener attributes need to be passed a `Callback` which is a wrapper around a closure. How you create your callback depends on how you wish your app to react to a listener event:
+监听器属性需要传递一个由闭包包裹的 `Callback`。创建回调的方式取决于你希望你的应用程序如何响应监听器事件：
 
 {% tabs %}
-{% tab title="Component Handler" %}
+{% tab title="Component 处理器" %}
 ```rust
 struct MyComponent {
     link: ComponentLink<Self>,
@@ -181,7 +181,7 @@ impl Component for MyComponent {
     }
 
     fn view(&self) -> Html {
-        // Create a callback from a component link to handle it in a component
+        // 从组件 link 中创建回调函数来在组件中处理它
         let click_callback = self.link.callback(|_: ClickEvent| Msg::Click);
         html! {
             <button onclick=click_callback>
@@ -226,7 +226,7 @@ impl Component for MyComponent {
 ```
 {% endtab %}
 
-{% tab title="Other Cases" %}
+{% tab title="其他情况" %}
 ```rust
 struct MyComponent;
 

@@ -1,22 +1,22 @@
-# Table of contents
+# 目录
 
 * [简介](README.md)
 
-## 从零开始 <a id="getting-started"></a>
+## 从零开始
 
 * [安装](getting-started/getting-started.md)
-* [第一个简单的App](getting-started/build-a-sample-app.md)
+* [第一个简单的 App](getting-started/build-a-sample-app.md)
 * [构建初始环境](getting-started/build-environment.md)
 * [初学者模板](getting-started/starter-templates.md)
 * [示例](getting-started/examples.md)
 
-## Core Concepts <a id="concepts"></a>
+## 核心概念
 
-* [Using html!](concepts/html/README.md)
-  * [Lists](concepts/html/lists.md)
-  * [Elements](concepts/html/elements.md)
-  * [Literals & Expressions](concepts/html/literals-and-expressions.md)
-  * [Components](concepts/html/components.md)
+* [使用 html!](concepts/html/README.md)
+  * [列表](concepts/html/lists.md)
+  * [元素](concepts/html/elements.md)
+  * [常量和表达式](concepts/html/literals-and-expressions.md)
+  * [组件](concepts/html/components.md)
 * [组件（Components）](concepts/components/README.md)
   * [Properties](concepts/components/properties.md)
   * [Callbacks](concepts/components/callbacks.md)
@@ -26,12 +26,12 @@
   * [Format](concepts/services/format.md)
 * [Router](concepts/router.md)
 
-## Advanced Topics
+## 高级主题
 
 * [Optimizations & Best Practices](advanced-topics/optimizations.md)
 * [Low-level library internals](advanced-topics/how-it-works.md)
 
-## More
+## 更多
 
 * [CSS](more/css.md)
 * [Roadmap](more/roadmap.md)

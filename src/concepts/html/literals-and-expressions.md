@@ -1,10 +1,10 @@
-# Literals & Expressions
+# 常量和表达式
 
-## Literals
+## 常量
 
-If expressions resolve to types that implement `Display`, they will be converted to strings and inserted into the DOM as a [Text](https://developer.mozilla.org/en-US/docs/Web/API/Text) node.
+如果一个表达式的类型本身实现了 `Display` （一个标准库中的 Trait），他们将会被转化成字符串并且作为一个 [Text](https://developer.mozilla.org/en-US/docs/Web/API/Text) 节点插入 DOM 中。
 
-All display text must be enclosed by `{}` blocks because text is handled like an expression. This is the largest deviation from normal HTML syntax that Yew makes.
+所有的需要显示的文本必须被 `{}` 块包含，因为这些文本会被当做一个 Rust 表达式来处理。这一点上，Yew 中使用 HTML 的方式和正常 HTML 语法有巨大的区别。
 
 ```rust
 let text = "lorem ipsum";
@@ -17,9 +17,9 @@ html!{
 }
 ```
 
-## Expressions
+## 表达式
 
-You can insert expressions in your HTML using `{}` blocks, as long as they resolve to `Html`
+你可以在 HTML 中使用 `{}` 块来插入 Rust 表达式，只要这些表达式最终可以被解析成 `Html`
 
 ```rust
 html! {
@@ -37,7 +37,7 @@ html! {
 }
 ```
 
-It often makes sense to extract these expressions into functions or closures to optimize for readability:
+通常我们会把这些表达式写进函数或者闭包中来增加可读性：
 
 ```rust
 let show_link = true;
