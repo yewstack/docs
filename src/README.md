@@ -14,7 +14,7 @@
 * 我们欢迎 pull requests 。 如果你想要帮助我们，先参考下 [good first issues](https://github.com/yewstack/yew/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) 吧！
 * 我们的 [Gitter chatroom](https://gitter.im/yewframework/Lobby) 非常的热闹，也是一个问问题和解决问题的好地方！
 
-![我们的社区正在茁壮成长！](https://img.shields.io/github/stars/yewstack/yew?color=009A5B&label=Github%20stars)
+![&#x6211;&#x4EEC;&#x7684;&#x793E;&#x533A;&#x6B63;&#x5728;&#x8301;&#x58EE;&#x6210;&#x957F;&#xFF01;](https://img.shields.io/github/stars/yewstack/yew?color=009A5B&label=Github%20stars)
 
 ### 准备好开始了吗？
 
@@ -46,3 +46,4 @@ Rust 同样可以用它丰富的类型系统和可信赖的所有权模型来帮
 * [Percy](https://github.com/chinedufn/percy) - _"A modular toolkit for building isomorphic web apps with Rust + WebAssembly"_
 * [Seed](https://github.com/seed-rs/seed) - _"A Rust framework for creating web apps"_
 * [Smithy](https://github.com/rbalicki2/smithy) - _"A framework for building WebAssembly apps in Rust"_
+
