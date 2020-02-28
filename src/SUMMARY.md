@@ -10,7 +10,7 @@
 * [Starter Templates](getting-started/starter-templates.md)
 * [Examples](getting-started/examples.md)
 
-## Core Concepts <a id="concepts"></a>
+## Core Concepts
 
 * [Using html!](concepts/html/README.md)
   * [Lists](concepts/html/lists.md)
