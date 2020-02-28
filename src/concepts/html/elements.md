@@ -20,7 +20,7 @@ html! {
 {% tab title="无效" %}
 ```rust
 html! {
-  <div id="my_div"> // <- MISSING CLOSE TAG
+  <div id="my_div"> // <- 缺少闭合标签
 }
 ```
 {% endtab %}
@@ -36,7 +36,7 @@ html! {
 {% tab title="无效" %}
 ```rust
 html! {
-  <input id="my_input"> // <- MISSING SELF-CLOSE
+  <input id="my_input"> // <- 没有自闭合
 }
 ```
 {% endtab %}
@@ -175,13 +175,13 @@ impl Component for MyComponent {
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::Click => {
-                // Handle Click
+                // 处理 Click
             }
         }
     }
 
     fn view(&self) -> Html {
-        // 从组件 link 中创建回调函数来在组件中处理它
+        // 从组件 link 中创建回调来在组件中处理它
         let click_callback = self.link.callback(|_: ClickEvent| Msg::Click);
         html! {
             <button onclick=click_callback>
@@ -214,7 +214,7 @@ impl Component for MyComponent {
     }
 
     fn view(&self) -> Html {
-        // Create a callback from a worker to handle it in another context
+        // 从 worker 中创建回调来在另一个上下文中处理它
         let click_callback = self.worker.callback(|_: ClickEvent| WorkerMsg::Process);
         html! {
             <button onclick=click_callback>
@@ -243,7 +243,7 @@ impl Component for MyComponent {
     }
 
     fn view(&self) -> Html {
-        // Create an ephemeral callback
+        // 创建一个短暂的回调
         let click_callback = Callback::from(|| {
             ConsoleService::new().log("clicked!");
         });
