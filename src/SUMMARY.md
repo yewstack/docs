@@ -10,7 +10,7 @@
 * [Starter Templates](getting-started/starter-templates.md)
 * [Examples](getting-started/examples.md)
 
-## Core Concepts
+## Core Concepts <a id="concepts"></a>
 
 * [Using html!](concepts/html/README.md)
   * [Lists](concepts/html/lists.md)
@@ -38,4 +38,3 @@
 * [Testing](more/testing.md)
 * [External Libs](more/external-libs.md)
 * [web-sys](more/web-sys.md)
-
