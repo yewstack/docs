@@ -2,7 +2,7 @@
 
 * [简介](README.md)
 
-## 从零开始
+## 从零开始 <a id="getting-started"></a>
 
 * [安装](getting-started/getting-started.md)
 * [第一个简单的 App](getting-started/build-a-sample-app.md)
@@ -10,7 +10,7 @@
 * [初学者模板](getting-started/starter-templates.md)
 * [示例](getting-started/examples.md)
 
-## 核心概念
+## 核心概念 <a id="concepts"></a>
 
 * [使用 html!](concepts/html/README.md)
   * [列表](concepts/html/lists.md)
@@ -26,12 +26,12 @@
   * [Format](concepts/services/format.md)
 * [Router](concepts/router.md)
 
-## 高级主题
+## 高级主题 <a id="advanced-topics"></a>
 
 * [Optimizations & Best Practices](advanced-topics/optimizations.md)
 * [Low-level library internals](advanced-topics/how-it-works.md)
 
-## 更多
+## 更多 <a id="more"></a>
 
 * [CSS](more/css.md)
 * [Roadmap](more/roadmap.md)
