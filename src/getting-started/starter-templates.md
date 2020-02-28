@@ -7,7 +7,7 @@
 
 使用这些例子和使用 `cargo-web` 的最重要的区别是 它们 使用了 `lib` 类型 而非 `bin` 类型的工程，同时你的应用的入口应该使用 `#[wasm_bindgen]` 标记出来。
 
-你的 `Cargo.toml` 同样应该指明你的工程的  crate-type 是 ".cdylib" 。
+你的 `Cargo.toml` 同样应该指明你的工程的 crate-type 是 ".cdylib" 。
 
 {% code title="Cargo.toml" %}
 ```text
@@ -29,6 +29,4 @@ wasm-bindgen = "0.2"
 ## Parcel
 
 * [Parcel Template](https://github.com/spielrs/yew-parcel-template) - 由一位社区成员建立并使用了 [Parcel](https://parceljs.org/) 。
-
-
 
