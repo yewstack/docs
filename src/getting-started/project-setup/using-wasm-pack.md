@@ -1,12 +1,4 @@
-# 构建初始环境
-
-## 构建工具
-
-事实上你并不需要额外的构建工具来发布 Yew 应用，但是我们推荐你使用一个。他们可以让部署和打包少去很多令人头疼的环节，比如为你生成所有必要的与 `.wasm` 对应的 JavaScript 文件，来让应用能顺利的跑在浏览器中。
-
-你可以通过浏览 [初学者模板](starter-templates.md) 来快速上手并开始一个应用，或者是继续阅读来查看更多有关开发工具的信息。
-
-## `wasm-pack`
+# Using wasm-pack
 
 这个工具由 Rust / Wasm 小组开发维护，并且是现在最为活跃的 WebAssembly 应用开发工具。 它支持将代码打包成 npm 模块，并且随附了 [Webpack plugin](https://github.com/wasm-tool/wasm-pack-plugin) 插件 可以轻松的与已有的 JavaScript 应用结合。可以点击此处了解更多 [here](https://rustwasm.github.io/docs/wasm-pack/introduction.html).
 
@@ -47,36 +39,3 @@ python -m SimpleHTTPServer 8080
 ### 支持生成的目标代码
 
 * `wasm32-unknown-unknown`
-
-## `cargo-web`
-
-Cargo web 是一个用来构建 web 应用的 Cargo 子命令，它可以让构建和部署 web 应用变得非常的简单。他同样也是唯一一个支持生成 Emscripten 目标代码的工具链，点击这里了解更多：[here](https://github.com/koute/cargo-web)
-
-### **安装**
-
-```bash
-cargo install cargo-web
-```
-
-### 构建
-
-```bash
-cargo web build
-```
-
-### 运行
-
-```bash
-cargo web start
-```
-
-### 支持生成的目标代码
-
-* `wasm32-unknown-unknown`
-* `wasm32-unknown-emscripten`
-* `asmjs-unknown-emscripten`
-
-{% hint style="info" %}
-对于 `*-emscripten` 的目标代码， `cargo-web` 将会自动安装 Emscripten SDK 并且为你生成目标代码。
-{% endhint %}
-

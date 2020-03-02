@@ -4,11 +4,14 @@
 
 ## 从零开始 <a id="getting-started"></a>
 
-* [安装](getting-started/getting-started.md)
-* [第一个简单的 App](getting-started/build-a-sample-app.md)
-* [构建初始环境](getting-started/build-environment.md)
+* [Project Setup](getting-started/project-setup/README.md)
+  * [Using wasm-pack](getting-started/project-setup/using-wasm-pack.md)
+  * [Using wasm-bindgen](getting-started/project-setup/using-wasm-bindgen.md)
+  * [Using cargo-web](getting-started/project-setup/using-cargo-web.md)
 * [初学者模板](getting-started/starter-templates.md)
-* [示例](getting-started/examples.md)
+* [第一个简单的 App](getting-started/build-a-sample-app.md)
+* [Choose web-sys or stdweb](getting-started/choose-web-library.md)
+* [Learn through 示例](getting-started/examples.md)
 
 ## 核心概念 <a id="concepts"></a>
 
@@ -37,5 +40,4 @@
 * [Roadmap](more/roadmap.md)
 * [Testing](more/testing.md)
 * [External Libs](more/external-libs.md)
-* [web-sys](more/web-sys.md)
 
