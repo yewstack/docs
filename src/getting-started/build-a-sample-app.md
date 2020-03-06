@@ -51,7 +51,7 @@ impl Component for App {
         match msg {
             Msg::Click => {
                 self.clicked = true;
-                true // Indicate that the Component should re-render
+                true // 指示组件应该重新渲染
             }
         }
     }
@@ -71,17 +71,15 @@ fn main() {
 ```
 {% endcode %}
 
-这份代码将构建你的称为`App` 的 `Component` 组件, 他会显示一个按钮, 当你点击它时, `App` 将会更新自己的状态. `yew::start_app::<App>()` 会启动你的应用并加载到 `<body>` 标签中. If you would like to start your application with any dynamic properties, you can instead use `yew::start_app_with_props(..)`.
+这份代码将构建你的称为 `App` 的 `Component` 根组件，它会显示一个按钮，当你点击它时，`App` 将会更新自己的状态。特别注意 `main()` 中的 `yew::start_app::<App>()`，它会启动你的应用并将其挂载到页面的 `<body>` 标签中。如果你想使用任何动态属性来启动应用程序，则可以使用 `yew::start_app_with_props(..)`。
 
-## 运行!
+## 运行你的应用程序!
 
-启动并运行你的应用的最快方式就是使用 [`cargo-web`](https://github.com/koute/cargo-web) . 如果你还没有的话, 请用 `cargo install cargo-web` 命令安装.
-
-运行一个用于开发的服务器来执行你的程序:
+启动并运行你的应用的最快方式就是使用 [`cargo-web`](https://github.com/koute/cargo-web)。如果你还没有的话，请用 `cargo install cargo-web` 命令来安装这个工具然后通过运行下述命令来构建和启动一个开发服务器：
 
 ```bash
 cargo web start
 ```
 
-`cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 作为目标代码, 然后构建你的应用, 你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问. 可以通过 `cargo web start --help` 命令来获取更多选项和帮助.
+`cargo-web` 将会自动为你添加 `wasm32-unknown-unknown` 作为目标代码，然后构建你的应用，你的应用将默认在 [http://\[::1\]:8000](http://[::1]:8000) 被访问。可以通过 `cargo web start --help` 命令来获取更多选项和帮助。
 
