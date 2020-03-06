@@ -1,8 +1,8 @@
-# Using cargo-web
+# 使用 cargo-web
 
-Cargo web 是一个用来构建 web 应用的 Cargo 子命令，它可以让构建和部署 web 应用变得非常的简单。他同样也是唯一一个支持生成 Emscripten 目标代码的工具链，点击这里了解更多：[here](https://github.com/koute/cargo-web)
+Cargo web 是一个用来构建 web 客户端应用的 Cargo 子命令，它让构建和部署 web 应用变得非常的简单。它同样也是唯一一个支持生成 Emscripten 目标代码的工具链。点击[这里](https://github.com/koute/cargo-web)了解更多。
 
-### **安装**
+### 安装
 
 ```bash
 cargo install cargo-web

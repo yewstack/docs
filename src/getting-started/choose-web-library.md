@@ -1,22 +1,22 @@
-# Choose web-sys or stdweb
+# 选择 web-sys 还是 stdweb
 
-### Introduction
+### 简介
 
-Yew apps can be built with either [`web-sys`](https://docs.rs/web-sys) or [`stdweb`](https://docs.rs/stdweb). These two crates provide the bindings between Rust and Web APIs. You'll need to choose one or the other when adding `yew` to your cargo dependencies:
+Yew 应用程序可以通过 [`web-sys`](https://docs.rs/web-sys) 或者 [`stdweb`](https://docs.rs/stdweb) 来构建。这两个 crates 提供了 Rust 和 Web API 之间的绑定。当把 `yew` 添加到你的 cargo 依赖时，你需要选择它们其中之一：
 
 {% code title="Cargo.toml" %}
 ```rust
-# Choose `web-sys`
+# 选择 `web-sys`
 yew = { version = "0.13", features = ["web_sys"] }
 
-# Choose `stdweb`
+# 选择 `stdweb`
 yew = { version = "0.13", features = ["std_web"] }
 ```
 {% endcode %}
 
-We recommend using `web-sys` due to its support from the [Rust / Wasm Working Group](https://rustwasm.github.io/). 
+我们建议选择 `web-sys`，因为它是由 [Rust / Wasm 工作组](https://rustwasm.github.io/) 提供支持。
 
-### Example Usage
+### 示例用法
 
 ```rust
 // web-sys
@@ -27,21 +27,21 @@ window.alert_with_message("hello from wasm!").expect("alert failed");
 let window: stdweb::web::Window = stdweb::web::window();
 window.alert("hello from wasm!");
 
-// stdweb with js! macro
+// stdweb 搭配 js! 宏
 use stdweb::js;
 use stdweb::unstable::TryFrom;
 use stdweb::web::Window;
 
-let window_val: stdweb::Value = js!{ return window; }; // <- JS syntax inside!
+let window_val: stdweb::Value = js!{ return window; }; // <- 里面使用 JS 语法
 let window = Window::try_from(window_val).expect("conversion to window failed");
 window.alert("hello from wasm!");
 ```
 
-The APIs for the two crates differ slightly but they serve roughly the same purpose with similar functionality.
+两个 crate 的 API 略有不用，但他们的目标大致相同，功能相似。
 
-### Choosing One
+### 选择其中之一
 
-There are a few different angles to consider when choosing between using `web-sys` and `stdweb` for your app. Note, it's possible to use both in one app, but to minimize the binary size of your compiled `.wasm` it's best to choose one or the other.  
+当为你的应用程序选择使用 `web-sys` 还是 `stdweb` 时，有几个不同的角度需要考虑。注意，可以在一个应用程序中同时使用两者，但是为了最小化编译的 `.wasm` 二进制体积，最好选择其中之一。
 
 
 <table>
@@ -56,26 +56,23 @@ There are a few different angles to consider when choosing between using `web-sy
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left">Project Status</td>
-      <td style="text-align:left">Actively maintained by the <a href="https://rustwasm.github.io/">Rust / Wasm Working Group</a>
+      <td style="text-align:left">项目状态</td>
+      <td style="text-align:left">由<a href="https://rustwasm.github.io/">Rust / Wasm 工作组积极维护</a>
       </td>
-      <td style="text-align:left">No Github activity for over 4 months</td>
+      <td style="text-align:left">超过四个月没有 Github 活动</td>
     </tr>
     <tr>
-      <td style="text-align:left">Web API Coverage</td>
-      <td style="text-align:left">Rust APIs are auto-generated from the Web IDL spec and so should have
-        100% coverage.</td>
-      <td style="text-align:left">Browser APIs are added as needed by the community</td>
+      <td style="text-align:left">Web API 覆盖率</td>
+      <td style="text-align:left">Rust API 是从 Web IDL 规范自动生成，因此理论上有 100% 的覆盖率。</td>
+      <td style="text-align:left">浏览器 API 是根据需求由社区添加</td>
     </tr>
     <tr>
-      <td style="text-align:left">Rust API Design</td>
-      <td style="text-align:left">Takes conservative approach by returning <code>Result</code> for most API
-        calls</td>
-      <td style="text-align:left">Often avoids <code>Result</code> in favor of panics. For instance, <code>stdweb::web::window()</code> will
-        panic when called in a worker.</td>
+      <td style="text-align:left">Rust API 设计</td>
+      <td style="text-align:left">采取保守的方法，为大多数 API 调用返回 <code>Result</code></td>
+      <td style="text-align:left">通常拒绝返回 <code>Result</code> 而更倾向于使用 panic。例如，在 worker 中调用 <code>stdweb::web::window()</code> 将 panic。</td>
     </tr>
     <tr>
-      <td style="text-align:left">Supported Build Tools</td>
+      <td style="text-align:left">支持的构建工具</td>
       <td style="text-align:left">
         <ul>
           <li><code>wasm-bindgen</code>
@@ -96,7 +93,7 @@ There are a few different angles to consider when choosing between using `web-sy
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">Supported Targets</td>
+      <td style="text-align:left">支持生成的目标代码</td>
       <td style="text-align:left">
         <ul>
           <li><code>wasm32-unknown-unknown</code>
@@ -115,7 +112,6 @@ There are a few different angles to consider when choosing between using `web-sy
       </td>
     </tr>
   </tbody>
-</table>For more information about picking a build tool, checkout the following page:
+</table>
 
-
-
+有关更多挑选构建工具的信息，请参阅以下页面：
