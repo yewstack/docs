@@ -114,4 +114,4 @@ window.alert("hello from wasm!");
   </tbody>
 </table>
 
-有关更多挑选构建工具的信息，请参阅以下页面：
+有关更多挑选构建工具的信息，请参阅 [Wasm 构建工具](project-setup/#wasm-build-tools) 指南。

@@ -11,7 +11,7 @@
 * [新手模板](getting-started/starter-templates.md)
 * [第一个简单的 App](getting-started/build-a-sample-app.md)
 * [选择 web-sys 还是 stdweb](getting-started/choose-web-library.md)
-* [通过示例学习](getting-started/examples.md)
+* [通过例子学习](getting-started/examples.md)
 
 ## 核心概念 <a id="concepts"></a>
 

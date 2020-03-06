@@ -27,5 +27,5 @@ cargo web start
 * `asmjs-unknown-emscripten`
 
 {% hint style="info" %}
-对于 `*-emscripten` 的目标代码， `cargo-web` 将会自动安装 Emscripten SDK 并且为你生成目标代码。
+对于 `*-emscripten` 的目标代码， 你需要安装 Emscripten SDK。
 {% endhint %}
