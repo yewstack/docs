@@ -2,7 +2,7 @@
 
 Cargo web is a cargo subcommand for building client web apps. It makes building and deploying web applications incredibly easy. It is also the only toolchain that supports Emscripten targets. Read more [here](https://github.com/koute/cargo-web).
 
-**Install**
+### Install
 
 ```bash
 cargo install cargo-web
@@ -27,6 +27,6 @@ cargo web start
 * `asmjs-unknown-emscripten`
 
 {% hint style="info" %}
-For `*-emscripten` targets, you'll need to install the Emscripten SDK
+For `*-emscripten` targets, `cargo-web` will automatically install the Emscripten SDK and generate targets for you.
 {% endhint %}
 

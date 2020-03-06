@@ -115,7 +115,6 @@ There are a few different angles to consider when choosing between using `web-sy
       </td>
     </tr>
   </tbody>
-</table>For more information about picking a build tool, checkout the following page:
+</table>
 
-
-
+For more information about picking a build tool, checkout the following page:
