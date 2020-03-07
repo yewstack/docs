@@ -1,30 +1,28 @@
 ---
-description: ComponentLink and Callbacks.
+description: ComponentLink 和 Callbacks.
 ---
 
-# Callbacks
+# 回调（Callbacks）
 
-The component "link" is the mechanism through which components are able to register callbacks and update themselves.
+组件“link”是一种机制，通过该机制，组件可以注册回调并自行更新。
 
 ## ComponentLink API
 
 ### callback
 
-Register a callback that will send a message to the component's update mechanism when it is executed. Under the hood, it will call `send_self` with the message that is returned by the provided closure. A`Fn(IN) -> Vec<COMP::Message>` is provided and a `Callback<IN>` is returned.
+注册一个回调，该回调将在执行时将消息发送到组件的更新机制。在内部，它将使用提供的闭包返回的消息调用 `send_self`。提供 `Fn(IN) -> Vec<COMP::Message>`，返回 `Callback<IN>`。
 
 ### send\_message
 
-Sends a message to the component immediately after the current loop finishes, causing another update loop to initiate.
+当前循环结束后立即向组件发送消息，导致另一个更新循环启动。
 
 ### send\_message\_batch
 
-Registers a callback that sends a batch of many messages at once when it is executed. If any of the messages cause the component to re-render, the component will re-render after all messages in the batch have been processed. A `Fn(IN) -> COMP::Message` is provided and a `Callback<IN>` is returned.
+注册一个回调，该回调在执行时立即发送一批消息。如果其中任何一个消息将导致组件重新渲染，那么组件会在该批次所有消息被处理后重新渲染。提供 `Fn(IN) -> COMP::Message`，返回 `Callback<IN>`。
 
 ## Callbacks
 
-_\(This might need its own short page.\)_
+Callbacks 用于与 Yew 中的 services，agents 和父组件进行通信。它们仅仅是个 `Fn`，并由 `Rc` 包裹以允许被克隆。
 
-Callbacks are used to communicate with services, agents, and parent components within Yew. They are just a `Fn`wrapped by an `Rc` to allow them to be cloned.
-
-They have an `emit` function that takes their `<IN>` type as an argument and converts that to a message expected by its destination. If a callback from a parent is provided in props to a child component, the child can call `emit` on the callback in its `update` lifecycle hook to send a message back to its parent. Closures or Functions provided as props inside the `html!` macro are automatically converted to Callbacks.
+它们有一个 `emit` 函数，该函数将它的 `<IN>` 类型作为参数并将其转换为目标所期望的消息。如果一个回调从父组件中通过 props 提供给子组件，则子组件可以在其 `update` 生命周期钩子中对该回调调用 `emit`，以将消息发送回父组件。在 `html!` 宏内被提供作为 props 的闭包或函数会自动转换为 Callbacks。
 

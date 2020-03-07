@@ -15,14 +15,14 @@
 
 ## 核心概念 <a id="concepts"></a>
 
-* [使用 html!](concepts/html/README.md)
+* [使用 html! 宏](concepts/html/README.md)
   * [列表](concepts/html/lists.md)
   * [元素](concepts/html/elements.md)
   * [常量和表达式](concepts/html/literals-and-expressions.md)
   * [组件](concepts/html/components.md)
 * [组件（Components）](concepts/components/README.md)
-  * [Properties](concepts/components/properties.md)
-  * [Callbacks](concepts/components/callbacks.md)
+  * [属性（Properties）](concepts/components/properties.md)
+  * [回调（Callbacks）](concepts/components/callbacks.md)
   * [Refs](concepts/components/refs.md)
 * [Agents](concepts/agents.md)
 * [Services](concepts/services/README.md)
@@ -37,7 +37,7 @@
 ## 更多 <a id="more"></a>
 
 * [CSS](more/css.md)
-* [Roadmap](more/roadmap.md)
-* [Testing](more/testing.md)
-* [External Libs](more/external-libs.md)
+* [路线图](more/roadmap.md)
+* [测试](more/testing.md)
+* [外部库](more/external-libs.md)
 
