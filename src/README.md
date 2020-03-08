@@ -28,9 +28,9 @@ Yew 项目基于划时代的新技术，非常适合那些希望开发未来基�
 
 #### **等等，为什么选用 WebAssembly?**
 
-WebAssembly _\(Wasm\)_ 是一种可移植的底层语言，并且可以由 Rust 编译而来。它在浏览器中可以以原生速度运行，还同时支持和 JavaScript 交互。这些在所有的主流浏览器中都已经提供。希望了解更多关于 WebAssembly 是如何为前端应用提速的，可以查看官方说明 [Use Cases](https://webassembly.org/docs/use-cases/).
+WebAssembly _\(Wasm\)_ 是一种可移植的底层语言，并且可以由 Rust 编译而来。它在浏览器中可以以原生速度运行，还同时支持和 JavaScript 交互。这些在所有的主流浏览器中都已经提供。希望了解更多关于 WebAssembly 是如何为前端应用提速的，可以查看官方[用例](https://webassembly.org/docs/use-cases/).
 
-值得注意的是，Wasm **（目前还）**并不是提高 Web 应用性能的**万金油（原文：A Silver Bullet）**就目前来说，在 WebAssembly 中使用 DOM API 仍然比从 JavaScript 中调用要慢。但只是暂时性问题的， [WebAssembly Interface Types](https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md) 计划将解决这个问题。如果你想要了解更多关于这方面的信息，可以查看 Mozilla 的这篇 [佳作](https://hacks.mozilla.org/2019/08/webassembly-interface-types/) 。
+值得注意的是，Wasm **（目前还）**并不是提高 Web 应用性能的**万金油（原文：A Silver Bullet）**就目前来说，在 WebAssembly 中使用 DOM API 仍然比从 JavaScript 中调用要慢。但只是暂时性问题的，[WebAssembly Interface Types](https://github.com/WebAssembly/interface-types/blob/master/proposals/interface-types/Explainer.md) 计划将解决这个问题。如果你想要了解更多关于这方面的信息，可以查看 Mozilla 的这篇[佳作](https://hacks.mozilla.org/2019/08/webassembly-interface-types/) 。
 
 #### 好的，那为什么选用 Rust 呢？
 

@@ -1,12 +1,12 @@
 ---
-description: Yew 框架的规划功能路线图
+description: Yew 框架规划功能的路线图
 ---
 
 # 路线图
 
 ## `v1.0.0`
 
-### 规划中的功能
+#### 规划中的功能
 
 * 标记 key 的列表项：[https://github.com/yewstack/yew/issues/479](https://github.com/yewstack/yew/issues/479)
 * 路由：[https://github.com/yewstack/yew\_router](https://github.com/yewstack/yew_router)
@@ -17,7 +17,7 @@ description: Yew 框架的规划功能路线图
 * 提高 Yew 框架的测试覆盖率
 * 增加性能基准测试：[https://github.com/yewstack/yew/issues/5](https://github.com/yewstack/yew/issues/5)
 
-### 指南
+#### 指南
 
 * 最佳实践：[https://yew.rs/docs/optimizations](https://yew.rs/docs/optimizations)
 * 端到端教程
@@ -28,7 +28,7 @@ description: Yew 框架的规划功能路线图
 
 ## 未来
 
-### 潜在功能
+#### 潜在功能
 
 * 服务端渲染：[https://github.com/yewstack/yew/issues/41](https://github.com/yewstack/yew/issues/41)
 * 组件库：[https://github.com/yewstrap/yewstrap](https://github.com/yewstrap/yewstrap)
