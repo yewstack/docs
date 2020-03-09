@@ -31,8 +31,8 @@
 
 ## 高级主题 <a id="advanced-topics"></a>
 
-* [Optimizations & Best Practices](advanced-topics/optimizations.md)
-* [Low-level library internals](advanced-topics/how-it-works.md)
+* [性能优化与最佳实践](advanced-topics/optimizations.md)
+* [底层库的内部细节](advanced-topics/how-it-works.md)
 
 ## 更多 <a id="more"></a>
 

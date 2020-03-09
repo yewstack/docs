@@ -1,40 +1,40 @@
 ---
-description: Yew's Actor System
+description: Yew 的 Actor 系统
 ---
 
 # Agents
 
-Agents are similar to Angular's [Services](https://angular.io/guide/architecture-services) \(but without dependency injection\), and provide a Yew with an [Actor Model](https://en.wikipedia.org/wiki/Actor_model). Agents can be used to route messages between components independently of where they sit in the component hierarchy, or they can be used to coordinate global state, or they can be used to offload computationally expensive tasks off of the main UI-thread, or communicate between different tabs \(in the future\).
+Agents 和 Angular 的 [Services](https://angular.io/guide/architecture-services) 相似（但没有依赖注入），给 Yew 提供了 [Actor 模型](https://en.wikipedia.org/wiki/Actor_model)。Agents 可以用于在组件之间路由消息，而与它们在组件层次结构中的位置无关，或者可以用于协调全局状态，或者可以用于从主 UI 线程上卸载计算密集型任务，或者在不同的标签页间通信（在未来）。
 
-Agents that run concurrently use [web-workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) to achieve that concurrency.
+Agents 使用 [web-workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 同时运行来实现并发。
 
-## Lifecycle
+## 生命周期
 
 {% hint style="info" %}
 `Contribute to our docs:` [Add a diagram of the Agent lifecycle](https://github.com/yewstack/docs/issues/23)
 {% endhint %}
 
-## Types of Agents
+## Agents 的类型
 
 #### Reaches
 
-* Job - Spawn a new agent on the UI thread for every new bridge. This is good for moving shared but independent behavior that communicates with the browser out of components. \(TODO verify\) When the task is done, the agent will disappear.
-* Context - Bridges will spawn or connect to an agent on the UI thread. This can be used to coordinate with state between components or other agents. When no bridges are connected to this agent, the agent will disappear.
-* Private - Same as Job, but runs on its own web worker. 
-* Public - Same as Context, but runs on its own web worker.
+* Job - 在 UI 线程上为每个新的 Bridge 生成一个新的 Agent。这对于将与浏览器通信的共享但独立的行为移出组件是很有用的。（待验证）任务完成后，Agent 将消失。
+* Context - Bridges 将生成或连接到 UI 线程上的 agent。这可用于在组件和其它 Agents 之间协调状态。当没有 Bridge 连接到该 Agent 时，Agent 将消失。
+* Private - 与 Job 相同，但运行在自己的 web worker 中。
+* Public - 与 Context 相同，但运行在自己的 web worker 中。
 * Global \(WIP\)
 
-## Agent Communication
+## Agent 通信
 
 ### Bridges
 
-Bridges will connect to an agent and allow two way communication.
+Bridges 将连接到一个 Agent 并且允许双向通信。
 
 ### Dispatchers
 
-Dispatchers are like bridges, but they can only send messages to agents.
+Dispatchers 和 Bridges 类似，但是他们只能发送消息给 Agents。
 
-## Overhead
+## 开销
 
-Agents communicate by serializing their messages using bincode\(???\). So there is a higher performance cost than just calling functions. Unless the cost of computation or the need to coordinate across arbitrary components will outweigh the cost of message passing, you should contain your logic to functions where possible.
+Agents 通过使用二进制码（bincode？？？）序列化其消息来进行通信。因此，存在比仅调用函数相比更高的性能消耗。除非计算成本或者在任意组件间协调的需求超过消息传递的成本，否则你应该尽可能地在函数中包含你的应用逻辑。
 

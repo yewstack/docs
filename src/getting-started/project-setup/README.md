@@ -6,7 +6,7 @@ description: 为成功做好准备
 
 ## Rust
 
-首先 ，你需要安装 Rust 。如何安装 Rust 和 `cargo` 构建工具，请参考 [官方说明](https://www.rust-lang.org/tools/install)。
+首先 ，你需要安装 Rust 。如何安装 Rust 和 `cargo` 构建工具，请参考[官方说明](https://www.rust-lang.org/tools/install)。
 
 ## **Wasm 构建工具**
 
@@ -47,9 +47,9 @@ description: 为成功做好准备
   <tbody>
     <tr>
       <td style="text-align:left">项目状态</td>
-      <td style="text-align:left">由 <a href="https://rustwasm.github.io/">Rust / Wasm 工作组积极维护</a>
+      <td style="text-align:left">由 <a href="https://rustwasm.github.io/">Rust / Wasm 工作组</a>积极维护
       </td>
-      <td style="text-align:left">由 <a href="https://rustwasm.github.io/">Rust / Wasm 工作组积极维护</a>
+      <td style="text-align:left">由 <a href="https://rustwasm.github.io/">Rust / Wasm 工作组</a>积极维护
       </td>
       <td style="text-align:left">超过六个月没有 Github 活动</td>
     </tr>

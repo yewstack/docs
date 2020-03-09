@@ -11,7 +11,7 @@ description: 组件及其生命周期钩子
 ## 生命周期
 
 {% hint style="info" %}
-`为我们的文档做出贡献：` [添加组件的生命周期图示](https://github.com/yewstack/docs/issues/22)
+`为我们的文档做出贡献：`[添加组件的生命周期图示](https://github.com/yewstack/docs/issues/22)
 {% endhint %}
 
 ## 生命周期方法

@@ -1,8 +1,8 @@
 ---
-description: Low level details about the framework
+description: 有关框架的底层细节
 ---
 
-# Low-level library internals
+# 底层库的内部细节
 
-Component-lifecycle state machine, vdom diff algorithm.
+组件生命周期状态机，虚拟 dom diff 算法。
 

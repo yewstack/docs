@@ -1,14 +1,14 @@
 ---
-description: Make your app faster.
+description: 加速你的应用程序
 ---
 
-# Optimizations & Best Practices
+# 性能优化与最佳实践
 
 ## neq\_assign
 
-When a component receives props from its parent component, the `change` method is called. This, in addition to allowing you to update the component's state, also allows you to return a `ShouldRender` boolean value that indicates if the component should re-render itself in response to the prop changes.
+当组件从它的父组件接收 props 时，`change` 方法将被调用。除了允许你更新组件的状态，还允许你返回一个布尔类型的值 `ShouldRender` 来指示组件是否应该响应 props 的更改而重新渲染自身。
 
-Re-rendering is expensive, and if you can avoid it, you should. As a general rule, you only want to re-render when the props actually changed. The following block of code represents this rule, returning `true` if the props differed from the previous props:
+重新渲染的开销很大，你应该尽量避免。一个通用的法则是，你只应该在 props 实际更改时重新渲染。以下代码块展示了此法则，如果 props 和先前的 props 不同，则返回 `true`：
 
 ```rust
 fn change(&mut self, props: Self::Properties) -> ShouldRender {
@@ -21,7 +21,7 @@ fn change(&mut self, props: Self::Properties) -> ShouldRender {
 }
 ```
 
-But we can go further! This is six lines of boilerplate can be reduced down to one by using a trait and a blanket implementation for anything that implements `PartialEq`.
+但是我们可以更进一步！对于任何实现了 `PartialEq` 的项，可以使用一个 trait 和一个 blanket implementation 将这六行样板代码减少到一行。
 
 {% code title="neq\_assign.rs" %}
 ```rust
@@ -46,59 +46,59 @@ fn change(&mut self, props: Self::Properties) -> ShouldRender {
 ```
 {% endcode %}
 
-The trait is called `NeqAssign` because it assigns the new value if the target and new value aren't equal.
+该 trait 称为 `NeqAssign` 是因为如果目标值和新值不相等，它将赋为新值。
 
-This is even shorter than the naive implementation:
+这比简单的实现还要短：
 
 ```rust
-// Don't do this, unless you can't avoid it.
+// 不要这样做，除非你无法避免。
 fn change(&mut self, props: Self::Properties) -> ShouldRender {
     self.props = props;
     true
 }
 ```
 
-You aren't limited to using this in the `change` function. It often makes sense to do this in the `update` function as well, although the performance wins aren't as obvious there.
+你不仅限在 `change` 函数中使用它。通常，在 `update` 函数中执行此操作也是有意义的，尽管性能提升在那里不太明显。
 
 ## wee\_alloc
 
-[wee\_alloc](https://github.com/rustwasm/wee_alloc) is a tiny allocator that is much smaller than the allocator that is normally used in Rust binaries. Replacing the default allocator with this one will result in smaller WASM file sizes, at the expense of speed and memory overhead.
+[wee\_alloc](https://github.com/rustwasm/wee_alloc) 是一个比 Rust 二进制文件中通常使用的分配器还小得多的微型分配器。用这个分配器来替代默认的分配器将使 WASM 文件体积更小，但会牺牲速度和内存开销。
 
-The slower speed and memory overhead are minor in comparison to the size gains made by not including the default allocator. This smaller file size means that your page will load faster, and so it is generally recommended that you use this allocator over the default, unless your app is doing some allocation-heavy work.
+对比不包含默认分配器换取的体积大小，牺牲的速度和内存开销是微不足道的。较小的文件体积意味着你的页面将加载更快，因此通常建议使用此分配器而不是默认分配器，除非你的应用程序会执行一些繁重的内存分配任务。
 
 ```rust
-// Use `wee_alloc` as the global allocator.
+// 将 `wee_alloc` 作为全局分配器
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 ```
 
 ## RC
 
-In an effort to avoid cloning large chunks of data to create props when re-rendering, we can use smart pointers to only clone the pointer instead. If you use `Rc<_>`s in your props and child components instead of plain unboxed values, you can delay cloning until you need to modify the data in the child component, where you use `Rc::make_mut` to clone and get a mutable reference to the data you want to alter. By not cloning until mutation, child components can reject props identical to their state-owned props in `Component::change` for almost no performance cost, versus the case where the data itself needs to be copied into the props struct in the parent before it is compared and rejected in the child.
+为了避免在重新渲染时为了创建 props 而克隆大块数据，我们可以使用智能指针来只克隆指针。如果在 props 和子组件中使用 `Rc<_>` 而不是普通未装箱的值，则可以延迟克隆直到需要修改子组件中的数据为止，在该组件中可以使用 `Rc::make_mut` 来对要更改数据进行克隆和获取可变引用。通过在要修改前不进行克隆，子组件可以在几乎没有性能成本的情况下拒绝与它们在 `Component::change` 中拥有状态的 props 相同的 props，这与数据本身需要先复制到父级 props 结构体中，然后在子级中进行比较和拒绝的情况相反。
 
-This optimization is most useful for data types that aren't `Copy`. If you can copy your data easily, then it probably isn't worth putting it behind a smart pointer. For structures that can contain lots of data like `Vec`, `HashMap`, and `String`, this optimization should be worthwhile.
+对于不是 `Copy` 类型的数据，这种优化是最有用的。如果你能轻松地拷贝数据，那么将其放入智能指针中可能是不值得的。对于可以包含大量数据的结构，例如 `Vec`，`HashMap` 和 `String`，这种优化应该是值得的。
 
-This optimization works best if the values are never updated by the children, and even better, if they are rarely updated by parents. This makes `Rc<_>s` a good choice for wrapping property values in for pure components.
+如果子组件从不更新组件的值，则这种优化效果最好，如果父组件很少更新组件的值，则效果更好。这使得 `Rc<_>s` 是包装纯组件属性值的不错选择。
 
-## View Functions
+## 视图函数
 
-For code readability reasons, it often makes sense to migrate sections of`html!` to their own functions so you can avoid the rightward drift present in deeply nested HTML.
+出于代码可读性的原因，将 `html!` 各个部分的代码迁移到他们自己的函数中通常是有意义的，这样就可以避免在深层嵌套的 HTML 中出现代码块向右偏移。
 
-## Pure Components/Function Components
+## 纯组件 / 函数式组件
 
-Pure components are components that don't mutate their state, only displaying content and propagating messages up to normal, mutable components. They differ from view functions in that they can be used from within the `html!` macro using the component syntax \(`<SomePureComponent />`\) instead of expression syntax \(`{some_view_function()}`\), and that depending on their implementation, they can be memoized - preventing re-renders for identical props using aforementioned `neq_assign` logic.
+纯组件是不会修改它们状态的组件，它们仅展示内容和向普通可变组件传递消息。它们与视图函数不同之处在于他们可以使用组件语法（`<SomePureComponent />`）而不是表达式语法（`{some_view_function()}`）来在 `html!` 宏中使用，并且根据它们的实现，它们可以被记忆化 - 使用前面提到的 `neq_assign` 逻辑来防止因为相同的 props 而重新渲染。
 
-Yew doesn't natively support pure or function components, but they are available via external crates.
+Yew 没有原生支持纯组件或者函数式组件，但是可以通过外部库获取它们。
 
-Function components don't exist yet, but in theory, pure components could be generated by using proc macros and annotating functions.
+函数式组件尚不存在，但是从理论上来讲，可以通过使用 proc 宏和标注函数生成纯组件。
 
 ## Keyed DOM nodes when they arrive
 
-## Compile speed optimizations using Cargo Workspaces
+## 使用 Cargo Workspaces 进行编译速度优化
 
-Arguabley, the largest drawback to using Yew is the long time it takes to compile. Compile time seems to correlate with the quantity of code found within `html!` macro blocks. This tends to not be a significant problem for smaller projects, but for webapps that span multiple pages, it makes sense to break apart your code across multiple crates to minimize the amount of work the compiler has to do.
+可以说，使用 Yew 的最大缺点是编译时间长。编译时间似乎与 `html!` 宏块中的代码量相关。对于较小的项目，这通常不是什么大问题，但是对于跨多个页面的 web 应用程序，将代码拆分为多个 crates 以最大程度地减少编译器要做的工作通常是有意义的。
 
-You should try to make your main crate handle routing/page selection, move all commonly shared code to another crate, and then make a different crate for each page, where each page could be a different component, or just a big function that produces `Html`. In the best case scenario, you go from rebuilding all of your code on each compile to rebuilding only the main crate, and one of your page crates. In the worst case, where you edit something in the "common" crate, you will be right back to where you started: compiling all code that depends on that commonly shared crate, which is probably everything else.
+你应该尝试让主 crate 处理路由和页面选择，将所有公用的代码移动到另一个 crate，然后为每一个页面创建一个不同的 crate，其中每个页面可能是一个不同的组件，或者只是一个产生 `Html` 的大函数。在最好的情况下，你将从重新构建所有代码到只重新构建主 crate 和一个页面的 crate。在最糟糕的情况下，当你在“公共” crate 中编辑内容时，你将回到起点：编译所有依赖此公用 crate 的代码，这可能就是除此之外的所有代码。
 
-If your main crate is too heavyweight, or you want to rapidly iterate on a deeply nested page \(eg. a page that renders on top of another page\), you can use an example crate to create a more simple implementation of the main page and render your work-in-progress component on top of that.
+如果你的主 crate 过于庞大，或者你想在深层嵌套的页面（例如，在另一个页面顶部渲染的页面）中快速迭代，则可以使用一个示例 crate 创建一个更简单的主页面实现并在之上渲染你正在开发的组件。
 

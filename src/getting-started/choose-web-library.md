@@ -57,7 +57,7 @@ window.alert("hello from wasm!");
   <tbody>
     <tr>
       <td style="text-align:left">项目状态</td>
-      <td style="text-align:left">由<a href="https://rustwasm.github.io/">Rust / Wasm 工作组积极维护</a>
+      <td style="text-align:left">由<a href="https://rustwasm.github.io/">Rust / Wasm 工作组</a>积极维护
       </td>
       <td style="text-align:left">超过四个月没有 Github 活动</td>
     </tr>

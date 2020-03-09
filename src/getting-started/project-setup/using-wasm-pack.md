@@ -30,7 +30,7 @@ rollup ./main.js --format iife --file ./pkg/bundle.js
 
 ### 部署
 
-选取你喜爱的服务器。这里我们使用一个简单的 Python 服务器来将项目部署到： [http://\[::1\]:8000](http://[::1]:8000)。
+选取你喜爱的服务器。这里我们使用一个简单的 Python 服务器来将项目部署到：[http://\[::1\]:8000](http://[::1]:8000)。
 
 ```bash
 python -m SimpleHTTPServer 8080
