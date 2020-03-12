@@ -12,7 +12,7 @@ description: 父组件到子组件的通信
 
 ### 必需属性
 
-The fields within a struct that implements `Properties` are required by default.  When the field is missing and the component is created in the `html!` macro, a compiler error is returned. For fields with optional properties, use `#[prop_or_default]` to use the default value for that type. To specify a value, use `#[prop_or_else(value)]` where value is the default value for the property.  For example, to default a boolean value as `true`, use the attribute `#[prop_or_else(true)]`. It is common for optional properties to use `Option` which defaults to `None`.
+默认情况下，实现了 `Properties` 的结构体中的字段是必需的。当缺少了该字段并且在 `html!` 宏中创建了组件时，将返回编译错误。对于具有可选属性的字段，使用 `#[prop_or_default]` 来使用该类型的默认值。要指定一个值，请使用 `#[prop_or_else(value)]`，其中 value 是该属性的默认值。例如，要将一个布尔值的默认值设置为 `true`，请使用属性 `#[prop_or_else(true)]`。可选属性通常使用 `Option`，其默认值为 `None`。
 
 ### PartialEq
 
@@ -65,7 +65,7 @@ pub struct LinkProps {
     /// 如果为 None，则 view 函数将不指定大小
     #[prop_or_default]
     size: Option<u32>
-    /// When the view function doesn't specify active, it defaults to true.
+    /// 当 view 函数没有指定 active，其默认为 true
     #[prop_or_else(true)]
     active: bool,
 }
