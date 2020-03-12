@@ -12,7 +12,7 @@ description: 父组件到子组件的通信
 
 ### 必需属性
 
-实现了 `Properties` 的结构体中的字段必须是 `Default` 或者应用了 `#[props(required)]` 属性。这个属性向框架发出信号，要求在 `html!` 宏中创建组件时必须提供该字段，否则将收到编译错误。对于非必需字段，通常是将它们包装在 `Option` 中，当不提供该字段时，默认为 `None`。
+The fields within a struct that implements `Properties` are required by default.  When the field is missing and the component is created in the `html!` macro, a compiler error is returned. For fields with optional properties, use `#[prop_or_default]` to use the default value for that type. To specify a value, use `#[prop_or_else(value)]` where value is the default value for the property.  For example, to default a boolean value as `true`, use the attribute `#[prop_or_else(true)]`. It is common for optional properties to use `Option` which defaults to `None`.
 
 ### PartialEq
 
@@ -55,16 +55,19 @@ impl Default for LinkColor {
 #[derive(Properties, PartialEq)]
 pub struct LinkProps {
     /// 链接必须有一个目标地址
-    #[props(required)]
     href: String,
     /// 如果链接文本很大，这将使得复制字符串开销更小
     /// 除非有性能问题，否则通常不建议这么做
-    #[props(required)]
     text: Rc<String>,
     /// 链接的颜色
+    #[prop_or_default]
     color: LinkColor,
     /// 如果为 None，则 view 函数将不指定大小
+    #[prop_or_default]
     size: Option<u32>
+    /// When the view function doesn't specify active, it defaults to true.
+    #[prop_or_else(true)]
+    active: bool,
 }
 ```
 
