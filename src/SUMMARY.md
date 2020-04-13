@@ -39,5 +39,6 @@
 * [CSS](more/css.md)
 * [路线图](more/roadmap.md)
 * [测试](more/testing.md)
+* [Debugging](more/debugging.md)
 * [外部库](more/external-libs.md)
 
