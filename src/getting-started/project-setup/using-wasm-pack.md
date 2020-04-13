@@ -6,13 +6,13 @@ This tool was created by the Rust / Wasm Working Group and is the most actively 
 Note that the crate-type in your `Cargo.toml` will need to be `cdylib` when using `wasm-pack`
 {% endhint %}
 
-### Install
+## Install
 
 ```bash
 cargo install wasm-pack
 ```
 
-### Build
+## Build
 
 This command will produce a bundle in the `./pkg` directory with your app's compiled WebAssembly along with a JavaScript wrapper which can be used to start your application.
 
@@ -20,7 +20,7 @@ This command will produce a bundle in the `./pkg` directory with your app's comp
 wasm-pack build
 ```
 
-### Bundle
+## Bundle
 
 For more information on Rollup visit this [guide](https://rollupjs.org/guide/en/#quick-start)
 
@@ -28,7 +28,7 @@ For more information on Rollup visit this [guide](https://rollupjs.org/guide/en/
 rollup ./main.js --format iife --file ./pkg/bundle.js
 ```
 
-### Serve
+## Serve
 
 Feel free to use your preferred server. Here we use a simple python server to serve to [http://\[::1\]:8000](http://[::1]:8000).
 
@@ -36,7 +36,7 @@ Feel free to use your preferred server. Here we use a simple python server to se
 python -m http.server 8000
 ```
 
-### Supported Targets
+## Supported Targets
 
 * `wasm32-unknown-unknown`
 
