@@ -1,8 +1,8 @@
 name: Doctests
 on: [push, pull_request]
-runs-on: ubuntu-latest
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Setup Rust
