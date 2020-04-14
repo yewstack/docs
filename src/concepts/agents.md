@@ -29,8 +29,8 @@ In order for agents to run concurrently, Yew uses [web-workers](https://develope
 
 ### Bridges
 
-A bridge allows bi-directional communication between an agent and a component.
-
+A bridge allows bi-directional communication between an agent and a component. Bridges also allow agents to communicate with one another.
+ 
 ### Dispatchers
 
 A dispatcher allows uni-directional communication between a component and an agent. A bridge allows a component to send messages to an agent.
