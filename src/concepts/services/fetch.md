@@ -1,10 +1,10 @@
 # Fetch
 ## Introduction
-The format module can be used to make requests to a server. This allows a Yew application to connect to a backend. 
+The fetch module can be used to make requests to a server. This allows a Yew application to connect to a backend. 
 
 ## Making requests
 ### Building requests
-Before you can send a request to the server, you need to construct it. This should be done using the `yew::services::fetch::Request` object.
+Before you can send a request to the server, you need to construct the request. This should be done using the `yew::services::fetch::Request` object.
 ```rust
 use yew::services::fetch::Request;
 use yew::format::Nothing;
@@ -22,3 +22,4 @@ To dispatch requests an instance of the `fetch_service` is needed. This can be c
 
 ## Further reading
 * [The API documentation](https://docs.rs/yew/0.14.3/yew/services/fetch/index.html)
+* The [dashboard](https://github.com/yewstack/yew/tree/master/examples/dashboard) and [npm_and_rest](https://github.com/yewstack/yew/tree/master/examples/web_sys/npm_and_rest) examples.
