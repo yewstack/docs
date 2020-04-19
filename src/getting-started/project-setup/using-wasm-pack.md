@@ -6,13 +6,13 @@
 注：如果使用 `wasm-pack`作为开发工具，`Cargo.toml` 中的 `crate-type` 需要为 `cdylib`
 {% endhint %}
 
-### 安装
+## 安装
 
 ```bash
 cargo install wasm-pack
 ```
 
-### 构建
+## 构建
 
 这条命令将在工程根目录下的 `./pkg` 目录中生成打包后的应用，其中包含应用的 WebAssembly 文件以及用来启动应用的 JavaScript 包装器。
 
@@ -20,7 +20,7 @@ cargo install wasm-pack
 wasm-pack build
 ```
 
-### 打包
+## 打包
 
 关于 Rollup 的更多信息，请查看这篇[指南](https://rollupjs.org/guide/en/#quick-start)
 
@@ -28,7 +28,7 @@ wasm-pack build
 rollup ./main.js --format iife --file ./pkg/bundle.js
 ```
 
-### 部署
+## 部署
 
 选取你喜爱的服务器。这里我们使用一个简单的 Python 服务器来将项目部署到：[http://\[::1\]:8000](http://[::1]:8000)。
 
@@ -36,6 +36,7 @@ rollup ./main.js --format iife --file ./pkg/bundle.js
 python -m SimpleHTTPServer 8080
 ```
 
-### 支持生成的目标代码
+## 支持生成的目标代码
 
 * `wasm32-unknown-unknown`
+
