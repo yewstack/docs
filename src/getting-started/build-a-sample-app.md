@@ -17,7 +17,7 @@ authors = ["Yew App Developer <name@example.com>"]
 edition = "2018"
 
 [dependencies]
-yew = { version = "0.13.0", features = ["std_web"] }
+yew = { version = "0.14.3", features = ["std_web"] }
 ```
 {% endcode %}
 
@@ -25,53 +25,52 @@ yew = { version = "0.13.0", features = ["std_web"] }
 
 {% code title="src/main.rs" %}
 ```rust
-use yew::{html, Callback, ClickEvent, Component, ComponentLink, Html, ShouldRender};
+use yew::prelude::*;
 
-struct App {
-    clicked: bool,
-    onclick: Callback<ClickEvent>,
+struct Model {
+    link: ComponentLink<Self>,
+    value: i64,
 }
 
 enum Msg {
-    Click,
+    AddOne,
 }
 
-impl Component for App {
+impl Component for Model {
     type Message = Msg;
     type Properties = ();
-
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
-        App {
-            clicked: false,
-            onclick: link.callback(|_| Msg::Click),
+        Self {
+            link,
+            value: 0,
         }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
-            Msg::Click => {
-                self.clicked = true;
-                true // 指示组件应该重新渲染
-            }
+            Msg::AddOne => self.value += 1
         }
+        true // 指示组件应该重新渲染
     }
 
     fn view(&self) -> Html {
-        let button_text = if self.clicked { "Clicked!" } else { "Click me!" };
-
         html! {
-            <button onclick=&self.onclick>{ button_text }</button>
+            <div>
+                <button onclick=self.link.callback(|_| Msg::AddOne)>{ "+1" }</button>
+                <p>{ self.value }</p>
+            </div>
         }
     }
 }
 
 fn main() {
-    yew::start_app::<App>();
+    yew::initialize();
+    App::<Model>::new().mount_to_body();
 }
 ```
 {% endcode %}
 
-这份代码将构建你的称为 `App` 的 `Component` 根组件，它会显示一个按钮，当你点击它时，`App` 将会更新自己的状态。特别注意 `main()` 中的 `yew::start_app::<App>()`，它会启动你的应用并将其挂载到页面的 `<body>` 标签中。如果你想使用任何动态属性来启动应用程序，则可以使用 `yew::start_app_with_props(..)`。
+这份代码将构建你的称为 `Model` 的 `Component` 根组件，它会显示一个按钮，当你点击它时，`Model` 将会更新自己的状态。特别注意 `main()` 中的 `App::<Model>::new().mount_to_body()`，它会启动你的应用并将其挂载到页面的 `<body>` 标签中。如果你想使用任何动态属性来启动应用程序，则可以使用 `App::<Model>::new().mount_to_body_with_props(..)`。
 
 ## 运行你的应用程序!
 

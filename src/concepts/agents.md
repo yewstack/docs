@@ -10,9 +10,7 @@ Agents 使用 [web-workers](https://developer.mozilla.org/en-US/docs/Web/API/Web
 
 ## 生命周期
 
-{% hint style="info" %}
-`Contribute to our docs:` [Add a diagram of the Agent lifecycle](https://github.com/yewstack/docs/issues/23)
-{% endhint %}
+![Agent lifecycle](https://user-images.githubusercontent.com/42674621/79125224-b6481d80-7d95-11ea-8e6a-ab9b52d1d8ac.png)
 
 ## Agents 的类型
 
@@ -37,4 +35,8 @@ Dispatchers 和 Bridges 类似，但是他们只能发送消息给 Agents。
 ## 开销
 
 Agents 通过使用二进制码 bincode 序列化其消息来进行通信。因此，存在比仅调用函数相比更高的性能消耗。除非计算成本或者在任意组件间协调的需求超过消息传递的成本，否则你应该尽可能地在函数中包含你的应用逻辑。
+
+## Further reading
+
+* The [pub\_sub](https://github.com/yewstack/yew/tree/master/examples/pub_sub) example shows how components can use agents to communicate with each other.
 

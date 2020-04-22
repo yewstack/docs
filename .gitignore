@@ -1,2 +1,6 @@
 book
 .DS_Store
+
+#Added by cargo
+/target
+Cargo.lock
