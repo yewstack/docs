@@ -17,7 +17,7 @@ authors = ["Yew App Developer <name@example.com>"]
 edition = "2018"
 
 [dependencies]
-yew = { version = "0.14.3", features = ["std_web"] }
+yew = { version = "0.15", package = "yew-stdweb" }
 ```
 {% endcode %}
 
@@ -60,6 +60,10 @@ impl Component for Model {
                 <p>{ self.value }</p>
             </div>
         }
+    }
+
+    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
+        false
     }
 }
 
