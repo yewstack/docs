@@ -90,7 +90,7 @@ You should try to make your main crate handle routing/page selection, move all c
 
 If your main crate is too heavyweight, or you want to rapidly iterate on a deeply nested page \(eg. a page that renders on top of another page\), you can use an example crate to create a more simple implementation of the main page and render your work-in-progress component on top of that.
 
-## Build size optimalization 
+## Build size optimalization
 
 - optimize rust code
   - `wee_aloc` ( using tiny allocator )
@@ -138,19 +138,21 @@ Further more it is possible to optimize size of `wasm` code.
 
 Info: [wasm-opt project](https://github.com/gonowa/wasm-opt)
 
-- using `wasm-pack` which automatically optimize wasm code in release builds
+- using `wasm-pack` which by default optimize `wasm` code in release builds
 - using `wasm-opt` directly on `wasm` files.
 
 ```
 wasm-opt wasm_bg.wasm -Os -o wasm_bg_opt.wasm
 ```
 
-**Example release size of 'minimal' crate in yew/examples/minimal**
+#### Build size of 'minimal' example in yew/examples/
 
-| used tool                   | size ( uncompressed )
+Note: `wasm-pack` combines optimalization for rust and wasm code. `wasm-bindgen` is in this example without any `rust` size optimalization.
+
+
+| used tool                   | size 
 | ---                         | ---
 | wasm-bindgen                | 158KB  
 | wasm-binggen + wasm-opt -Os | 116KB 
 | wasm-pack                   | 99 KB
 
-Note: `wasm-pack` combines optimalization for rust and wasm code. `wasm-bindgen` is in this example without any `rust` size optimalization
