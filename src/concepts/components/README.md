@@ -83,9 +83,11 @@ impl Component for MyComponent {
         }
     }
 
-    fn rendered(&mut self, _first_render: bool) {
-        if let Some(input) = self.node_ref.try_into::<InputElement>() {
-            input.focus();
+    fn rendered(&mut self, first_render: bool) {
+        if first_render {
+            if let Some(input) = self.node_ref.try_into::<InputElement>() {
+                input.focus();
+            }
         }
     }
 }
