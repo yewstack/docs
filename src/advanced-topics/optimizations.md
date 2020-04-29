@@ -136,7 +136,9 @@ lto = true
 
 Further more it is possible to optimize size of `wasm` code.
 
-Info: [wasm-opt project](https://github.com/gonowa/wasm-opt)
+wasm-opt info: [binaryen project](https://github.com/WebAssembly/binaryen)
+
+Example how to use: [rustwasm code size optimalization](https://rustwasm.github.io/book/game-of-life/code-size.html)
 
 - using `wasm-pack` which by default optimize `wasm` code in release builds
 - using `wasm-opt` directly on `wasm` files.
