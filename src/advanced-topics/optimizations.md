@@ -90,9 +90,9 @@ You should try to make your main crate handle routing/page selection, move all c
 
 If your main crate is too heavyweight, or you want to rapidly iterate on a deeply nested page \(eg. a page that renders on top of another page\), you can use an example crate to create a more simple implementation of the main page and render your work-in-progress component on top of that.
 
-## Build size optimalization
+## Build size optimization
 
-- optimize rust code
+- optimize Rust code
   - `wee_aloc` ( using tiny allocator )
   - `cargo.toml` ( defining release profile )
 - optimize wasm code using `wasm-opt`
@@ -114,7 +114,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 ### Cargo.toml
 
-It is possible to setup release build for smaller size using `[profile.relase]` section in `Cargo.toml`
+It is possible to setup release build for smaller size using `[profile.release]` section in `Cargo.toml`
 
 [Rust profiles documentation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
@@ -122,13 +122,13 @@ It is possible to setup release build for smaller size using `[profile.relase]` 
 [profile.release]
 # less code to include into binary
 panic = 'abort' 
-# optimalization over all codebase ( better optimalization, slower build )
+# optimization over all codebase ( better optimization, slower build )
 codegen-units = 1
-# optimalization for size ( more aggresive )
+# optimization for size ( more aggresive )
 opt-level = 'z' 
-# optimalization for size 
+# optimization for size 
 # opt-level = 's' 
-# link time optimalizaiton using using whole-program analysis
+# link time optimization using using whole-program analysis
 lto = true 
 ```
 
@@ -138,9 +138,9 @@ Further more it is possible to optimize size of `wasm` code.
 
 wasm-opt info: [binaryen project](https://github.com/WebAssembly/binaryen)
 
-Example how to use: [rustwasm code size optimalization](https://rustwasm.github.io/book/game-of-life/code-size.html)
+The Rust Wasm book features a section about reducing the size of WASM binaries: [Shrinking .wasm size](https://rustwasm.github.io/book/game-of-life/code-size.html)
 
-- using `wasm-pack` which by default optimize `wasm` code in release builds
+- using `wasm-pack` which by default optimizes `wasm` code in release builds
 - using `wasm-opt` directly on `wasm` files.
 
 ```
@@ -149,7 +149,7 @@ wasm-opt wasm_bg.wasm -Os -o wasm_bg_opt.wasm
 
 #### Build size of 'minimal' example in yew/examples/
 
-Note: `wasm-pack` combines optimalization for rust and wasm code. `wasm-bindgen` is in this example without any `rust` size optimalization.
+Note: `wasm-pack` combines optimization for rust and wasm code. `wasm-bindgen` is in this example without any `rust` size optimization.
 
 
 | used tool                   | size 
