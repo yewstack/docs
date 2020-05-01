@@ -149,7 +149,7 @@ wasm-opt wasm_bg.wasm -Os -o wasm_bg_opt.wasm
 
 #### Build size of 'minimal' example in yew/examples/
 
-Note: `wasm-pack` combines optimization for rust and wasm code. `wasm-bindgen` is in this example without any `rust` size optimization.
+Note: `wasm-pack` combines optimization for Rust and wasm code. `wasm-bindgen` is in this example without any `Rust` size optimization.
 
 
 | used tool                   | size 
