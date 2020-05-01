@@ -1,0 +1,8 @@
+[book]
+authors = ["Teymour Aldridge"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Yew"
+[output.html]
+theme = "src/theme"
