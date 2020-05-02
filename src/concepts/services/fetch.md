@@ -37,6 +37,30 @@ struct FetchServiceExample {
     link: ComponentLink<Self>
 }
 
+impl FetchServiceExample {
+    fn view_iss_location(&self) -> Html {
+        match self.iss {
+            Some(space_station) => html! {
+                <p>{"The ISS is at:"}</p>
+                <p>{format!("Latitude: {}", space_station.iss_location.latitude)}</p>
+                <p>{format!("Longitude: {}", space_station.iss_location.longitude)}</p>
+            }
+            None => html! {
+                <button onclick=self.link.callback(|_| {<Self as Component>::Message::GetLocation})>
+                    {"Where is the ISS?"}
+                </button>
+           }
+        }
+    }
+    fn is_fetching(&self) -> Html {
+        if self.fetching {
+            html! {<p>{"Fetching data..."}</p>}
+        } else {
+            html! {<p></p>}
+        }
+    }
+}
+
 #[derive(Deserialize, Debug, Clone)]
 struct ISSPosition {
     latitude: String,
@@ -114,26 +138,8 @@ impl Component for FetchServiceExample {
     fn view(&self) -> Html {
         html! {
             <>
-                {if self.fetching {
-                    html! {<p>{"Fetching data..."}</p>}
-                } else {
-                    html! {<p></p>}
-                }}
-                {
-                    match self.iss {
-                        Some(space_station) => html! {
-                            <p>{"The ISS is at:"}</p>
-                            <p>{format!("Latitude: {}", space_station.iss_location.latitude)}</p>
-                            <p>{format!("Longitude: {}", space_station.iss_location.longitude)}</p>
-                        }
-                        None => html! {
-                            <button onclick=self.link.callback(|_| {Self::Message::GetLocation})>
-                                {"Where is the ISS?"}
-                            </button>
-                        }
-                    }
-                }
-                
+                {self.is_fetching()}
+                {self.view_iss_location()}
             </>
         }
     }
