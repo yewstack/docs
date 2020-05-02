@@ -108,7 +108,11 @@ impl Component for FetchServiceExample {
                     // split up the response into the HTTP data about the request result and data from the request
                     let (meta, Json(data)) = response.into_parts();
                     if meta.status.is_success() && data.message == "success" {
-                        Self::Message::ReceiveLocation(data)
+                        Self::Message::ReceiveLocation(match data {
+                            Ok(d) => d,
+                            // handle errors more properly than this
+                            Err(_) => panic!("Could not handle this error")
+                        })
                     } else {
                         Self::Message::Noop
                     }
@@ -116,7 +120,7 @@ impl Component for FetchServiceExample {
                 // 3. pass the request and callback to the fetch service 
                 FetchService::new().fetch(request, callback);
                 self.fetching = true;
-                // we want to redraw so that the page displays a 'fetching...' message to the user
+                // we want to redraw so that the page displays a 'fetching...' message to the user so return 'true'
                 true
             }
             ReceiveLocation(location) => {
