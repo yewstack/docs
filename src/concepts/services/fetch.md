@@ -99,7 +99,7 @@ impl Component for FetchServiceExample {
                     }
                 });
                 // 3. pass the request and callback to the fetch service 
-                self.fetch_service.fetch(request, callback);
+                FetchService::new().fetch(request, callback);
                 self.fetching = true;
                 // we want to redraw so that the page displays a 'fetching...' message to the user
                 true
