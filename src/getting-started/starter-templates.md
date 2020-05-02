@@ -29,7 +29,6 @@ wasm-bindgen = "0.2"
 ```
 {% endcode %}
 
-## Parcel
-
+## Futher reading
 * [Parcel Template](https://github.com/spielrs/yew-parcel-template) - Created by a community member and uses [Parcel](https://parceljs.org/)
 
