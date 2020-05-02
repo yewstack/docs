@@ -32,7 +32,6 @@ use serde::Deserialize;
 
 #[derive(Debug, Clone)]
 struct FetchServiceExample {
-    fetch_service: FetchService,
     ft: Option<FetchTask>,
     iss: Option<ISS>,
     link: ComponentLink<Self>
