@@ -102,7 +102,7 @@ impl Component for FetchServiceExample {
                 // we want to redraw so that the page displays a 'fetching...' message to the user
                 true
             }
-            Self::Message::ReceiveLocation(location) => {
+            ReceiveLocation(location) => {
                 self.iss = location;
                 self.fetching = false;
                 // we want to redraw so that the page no longer says 'fetching...'
