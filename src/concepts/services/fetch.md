@@ -70,7 +70,7 @@ impl Component for FetchServiceExample {
         }
     }
     fn change(&mut self, _: Self::Properties) -> bool {
-        unimplemented!()
+        false
     }
     fn update(&mut self, msg: Self::Message) -> bool {
         match msg {
