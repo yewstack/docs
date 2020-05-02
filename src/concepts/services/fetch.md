@@ -107,15 +107,8 @@ impl Component for FetchServiceExample {
                 let callback = self.link.callback(|response: Response<Json<Result<ISS, anyhow::Error>>>| {
                     // split up the response into the HTTP data about the request result and data from the request
                     let (meta, Json(data)) = response.into_parts();
-                    if meta.status.is_success() {
-                        match data.message {
-                            "success" => {
-                                Self::Message::ReceiveLocation(data.clone())
-                            }
-                            _ => {
-                                Self::Message::Noop
-                            }
-                        }
+                    if meta.status.is_success() && data.message == "success" {
+                        Self::Message::ReceiveLocation(data)
                     } else {
                         Self::Message::Noop
                     }
