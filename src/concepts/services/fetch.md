@@ -63,7 +63,6 @@ impl Component for FetchServiceExample {
     type Properties = ();
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         Self {
-            fetch_service: FetchService::new(),
             ft: None,
             iss: None,
             link,
