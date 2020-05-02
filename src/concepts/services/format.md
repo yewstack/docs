@@ -40,5 +40,5 @@ let Json(rebuilt_request): Json<Result<APIRequest, _>> = Json::from(Ok(raw_api_r
 ```
 
 ## Further reading
-* [The API documentation](https://docs.rs/yew/0.14.3/yew/format/index.html)
+* [The API documentation](https://docs.rs/yew/*/yew/format/index.html)
 * [The serde documentation](https://serde.rs)
