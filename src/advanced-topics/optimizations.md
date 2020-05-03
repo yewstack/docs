@@ -53,6 +53,7 @@ The Rust Book has a [chapter on smart pointers](https://doc.rust-lang.org/stable
 As you write code which uses the `html!` macro you may find that your code becomes progressively harder to read as you add more code to your component because the amount of indentation increases hugely.
 
 ```rust
+use yew::prelude::*;
 html! {
     <>
         <div class="something">
@@ -71,6 +72,7 @@ html! {
 To make code easier to read, code in `html!` macro calls can be split up into different functions and which can then be called from the `view` function. 
 
 ```rust
+use yew::prelude::*;
 fn something() -> Html {
     html! {
         <div class="something">
