@@ -11,37 +11,23 @@ When a component receives props from its parent component, the `change` method i
 Because re-rendering is computationally expensive, you should avoid it where possible. In general, you should only trigger a re-render when the props have actually changed. An example of how this might be done is given below.
 
 ```rust
-fn change(&mut self, props: Self::Properties) -> ShouldRender {
-    if self.props != &props {
-        *self.props = props;
-        true
-    } else {
-        false
-    }
-}
-```
+use yew::ShouldRender;
+#[derive(PartialEq)]
+struct ExampleProps;
 
-But we can go further! These six lines of code can be rewritten as just a single line by defining a trait and writing a generic implementation for any type which implements [`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html).
+struct Example {
+    props: ExampleProps,
+};
 
-{% code title="neq\_assign.rs" %}
-```rust
-pub trait NeqAssign {
-    fn neq_assign(&mut self, new: Self) -> ShouldRender;
-}
-impl<T: PartialEq> NeqAssign for T {
-    fn neq_assign(&mut self, new: T) -> ShouldRender {
-        if self != &new {
-            *self.props = new;
+impl Example {
+    fn change(&mut self, props: ExampleProps) -> ShouldRender {
+        if self.props != props {
+            self.props = props;
             true
         } else {
             false
         }
     }
-}
-
-// some code omitted for clarity ...
-fn change(&mut self, props: Self::Properties) -> ShouldRender {
-    self.props.neq_assign(props)
 }
 ```
 {% endcode %}
