@@ -19,11 +19,15 @@
   * [Lists](concepts/html/lists.md)
   * [Elements](concepts/html/elements.md)
   * [Literals & Expressions](concepts/html/literals-and-expressions.md)
-  * [Components](concepts/html/components.md)
 * [Components](concepts/components/README.md)
+  * [Internal State](concepts/components/internalstate.md)
+  * [Trap events](concepts/components/trapevents.md)
   * [Properties](concepts/components/properties.md)
-  * [Callbacks](concepts/components/callbacks.md)
+  * [Emit events](concepts/components/emitevents.md)
+  * [Nested component](concepts/components/nestedcomponents.md)
   * [Refs](concepts/components/refs.md)
+  * [Styling](concepts/components/styling.md)
+  * [Life cycle](concepts/components/lifecycle.md)
 * [Agents](concepts/agents.md)
 * [Services](concepts/services/README.md)
   * [Format](concepts/services/format.md)
@@ -36,9 +40,7 @@
 
 ## More
 
-* [CSS](more/css.md)
 * [Roadmap](more/roadmap.md)
 * [Testing](more/testing.md)
 * [Debugging](more/debugging.md)
 * [External Libs](more/external-libs.md)
-

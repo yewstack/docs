@@ -1,26 +1,200 @@
 ---
-description: Parent to child communication
+description: The component could expose property attributes to receive data from the parent html component
 ---
 
 # Properties
 
-Properties enable child and parent components to communicate with each other.
+This is a common way to receive data from the parent html component via property.
 
-## Derive macro
+The properties structure are defined in a dedicated struct derivating `Properties` and `Clone`traits.
 
-Don't try to implement `Properties` yourself, derive it by using `#[derive(Properties)]` instead.
+The properties bag is attached to the state adding the field `props` in the component struct and defining the `Properties` `Type` in the component trait implementation.
 
-{% hint style="info" %}
-Types for which you derive `Properties` must also implement `Clone`. This can be done by either using `#[derive(Properties, Clone)` or manually implementing `Clone` for your type.
-{% endhint %}
+The properties have to be intialized in the `create` method. As for `link`, the framework push to the method the bag of the properties and can be used to attach it to the internal state.
 
-### Required attributes
+It' possible to define some attributes to the properties as:
 
-The fields within a struct that derives `Properties` are required by default. When a field is missing and the component is created in the `html!` macro, a compiler error is returned. For fields with optional properties, use the `#[prop_or_default]` attribute to use the default value for that type when the prop is not specified. To specify a value, use the `#[prop_or_else(value)]` attribute where value is the default value for the property. For example, to default a boolean value as `true`, use the attribute `#[prop_or_else(true)]`. It is common for optional properties to use the `Option` enum which has the default value `None`.
+- optional and initialized with Rust default value
+- optional and initialieed with component default value
+- mandatory, the parent must define a value for the attribute
 
-### PartialEq
+> remark: for convenience and/or performance optimization `Props` can derive `PartialEq` to avoid to re-render if there is no changed.cf. `change` method
 
-It is likely to make sense to derive `PartialEq` on your props if you can do this. Using `PartialEq` makes it much easier to avoid unnecessary rerendering \(this is explained in the **Optimizations & Best Practices** section\).
+```rust
+use yew::prelude::*;
+
+pub struct UseOfPropertyComponent {
+    link: ComponentLink<Self>,
+    props: Props,
+    name: String,
+    show_message: bool,
+}
+
+pub enum Msg {
+    Click(),
+}
+
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    pub name: String,
+}
+
+impl Component for UseOfPropertyComponent {
+    type Message = Msg;
+    type Properties = Props;
+
+    fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
+        Self {
+            link,
+            props: props.clone(),
+            name: props.name.into(),
+            show_message: false,
+        }
+    }
+
+    fn update(&mut self, msg: Self::Message) -> ShouldRender {
+        match msg {
+            Msg::Click() => self.show_message = true,
+        }
+        true
+    }
+
+    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+        if self.props != props {
+            self.props = props;
+            true
+        } else {
+            false
+        }
+    }
+
+    fn view(&self) -> Html {
+        if !self.show_message {
+            html! {
+                <>
+                    <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"}</button>
+                </>
+            }
+        } else {
+            html! {
+                <>
+                    <h1>{format!("Hello {}",self.name)}</h1>
+                </>
+            }
+        }
+    }
+}
+
+```
+
+In order to use this component you have to:
+
+```rust
+...
+    <div class="full-height">
+        {"In this example we pass the name as parameter of the Yew component."}
+        <UseOfPropertyComponent name="Clark"/>
+    </div>
+...
+
+```
+
+## Define the properties structure
+
+```rust
+...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    pub name: String,
+}
+...
+```
+
+## Attach the property bag in the state
+
+```rust
+pub struct UseOfPropertyComponent {
+    link: ComponentLink<Self>,
+    props: Props,
+    name: String,
+    show_message: bool,
+}
+
+```
+
+## Initialize the properties
+
+```rust
+...
+    fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
+        Self {
+            link,
+            props: props.clone(),
+            name: props.name.into(),
+            show_message: false,
+        }
+    }
+...
+```
+
+> Here, to simply extend the previous example, we `.clone()` the `props` argument. It may not be needed in your code
+
+## Mandatory property
+
+In this example the property have to be defined using the component. If it's omitted a compilatioin error is raised. The error looks like:
+
+> no method named `build` found for struct `components::comp4::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>` in the current scope
+> method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
+comp4.rs(14, 10): method `build` not found for this`
+
+## Optional property
+
+Property can be defined optional just adding `#[prop_or_default]` on the property. In that case the property value will be initialized by the default Rust type value.
+
+```rust
+...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    #[prop_or_default]
+    pub name: String,
+}
+...
+```
+
+In that case we will just say "Hello" ;-)
+
+## Optional property with component default value
+
+Property can be defined optional just adding `#[prop_or_default]` on the property. In that case the property value will be initialized by the default Rust type value.
+
+```rust
+...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    #[prop_or("Clark by default".to_string())]
+    pub name: String,
+}...
+```
+
+In that case we will say "Hello Clark by default" ;-)
+
+## Optimize rendering in the `change` method
+
+In order to avoid unecessary rendring it's possible to compare the mutation of the `props` bag in the `change` method.
+This optimization imply to derive `PartialEq` for the `Props` struct to easily compare the `props` bag passed as argument of the method and the one in the internal state of the component.
+
+```rust
+...
+    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+        if self.props != props {
+            self.props = props;
+            true
+        } else {
+            false
+        }
+    }
+...
+```
 
 ## Memory/speed overhead of using Properties
 
@@ -32,7 +206,7 @@ The implication of this is if you would otherwise be passing _huge_ amounts of d
 
 If you won't need to modify the data passed down through props you can wrap it in an `Rc` so that only a reference-counted pointer to the data is cloned, instead of the actual data itself.
 
-## Example
+### Example
 
 ```rust
 use std::rc::Rc;
@@ -72,4 +246,3 @@ pub struct LinkProps {
     active: bool,
 }
 ```
-
