@@ -2,13 +2,13 @@
 description: Make your app faster.
 ---
 
-# Optimizations & Best Practices
+# Optimizations and Best Practices
 
 ## neq\_assign
 
-When a component receives props from its parent component, the `change` method is called. This, in addition to allowing you to update the component's state, also allows you to return a `ShouldRender` boolean value that indicates if the component should re-render itself in response to the prop changes.
+When a component receives props from its parent component, the `change` method is called. The `change` method takes a mutable reference to `self` through which you can make changes to your applications state. It returns a `ShouldRender` (which is currently an alias to `bool`) which should be `true` if your component needs to re-render after the new props have been received and `false` if the component does not need to re-render.
 
-Re-rendering is expensive, and if you can avoid it, you should. As a general rule, you only want to re-render when the props actually changed. The following block of code represents this rule, returning `true` if the props differed from the previous props:
+Because re-rendering is computationally expensive, you should avoid it where possible. In general, you should only trigger a re-render when the props have actually changed. An example of how this might be done is given below.
 
 ```rust
 fn change(&mut self, props: Self::Properties) -> ShouldRender {
@@ -21,7 +21,7 @@ fn change(&mut self, props: Self::Properties) -> ShouldRender {
 }
 ```
 
-But we can go further! This is six lines of boilerplate can be reduced down to one by using a trait and a blanket implementation for anything that implements `PartialEq`.
+But we can go further! These six lines of code can be rewritten as just a single line by defining a trait and writing a generic implementation for any type which implements [`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html).
 
 {% code title="neq\_assign.rs" %}
 ```rust
@@ -31,7 +31,7 @@ pub trait NeqAssign {
 impl<T: PartialEq> NeqAssign for T {
     fn neq_assign(&mut self, new: T) -> ShouldRender {
         if self != &new {
-            *self = new;
+            *self.props = new;
             true
         } else {
             false
@@ -39,16 +39,16 @@ impl<T: PartialEq> NeqAssign for T {
     }
 }
 
-// ...
+// some code omitted for clarity ...
 fn change(&mut self, props: Self::Properties) -> ShouldRender {
     self.props.neq_assign(props)
 }
 ```
 {% endcode %}
 
-The trait is called `NeqAssign` because it assigns the new value if the target and new value aren't equal.
+The trait is called `NeqAssign` because it assigns the value of the new props to `self.props` if the values of the new props and the existing props are not the same.
 
-This is even shorter than the naive implementation:
+This is even shorter than a naive implementation which always updates the props, even if they are the same:
 
 ```rust
 // Don't do this, unless you can't avoid it.
@@ -58,33 +58,81 @@ fn change(&mut self, props: Self::Properties) -> ShouldRender {
 }
 ```
 
-You aren't limited to using this in the `change` function. It often makes sense to do this in the `update` function as well, although the performance wins aren't as obvious there.
+You aren't limited to using this in the `change` method. It often makes sense to do this in the `update` method as well, although the performance gains are not as obvious there.
 
-## RC
+## Rc (reference counted variables)
 
-In an effort to avoid cloning large chunks of data to create props when re-rendering, we can use smart pointers to only clone the pointer instead. If you use `Rc<_>`s in your props and child components instead of plain unboxed values, you can delay cloning until you need to modify the data in the child component, where you use `Rc::make_mut` to clone and get a mutable reference to the data you want to alter. By not cloning until mutation, child components can reject props identical to their state-owned props in `Component::change` for almost no performance cost, versus the case where the data itself needs to be copied into the props struct in the parent before it is compared and rejected in the child.
+In an effort to avoid cloning large chunks of data to create props when re-rendering, we can use smart pointers to only clone a pointer to the props instead. If you use `Rc<_>`s in your props and child components instead of plain unboxed values, you can delay cloning until you need to modify the data in the child component, where you use `Rc::make_mut` to clone and get a mutable reference to the data you want to alter. By not cloning until mutation, child components can reject props identical to their state-owned props in `Component::change` with almost no performance cost, versus the case where the data itself needs to be copied into the props struct in the parent before it is compared and rejected in the child.
 
-This optimization is most useful for data types that aren't `Copy`. If you can copy your data easily, then it probably isn't worth putting it behind a smart pointer. For structures that can contain lots of data like `Vec`, `HashMap`, and `String`, this optimization should be worthwhile.
+This optimization is most useful for data types that do not implement `Copy`. If you can copy your data easily, then it probably isn't worth putting it behind a smart pointer. For structures that can contain lots of data like `Vec`, `HashMap`, and `String`, this optimization should be worthwhile.
 
-This optimization works best if the values are never updated by the children, and even better, if they are rarely updated by parents. This makes `Rc<_>s` a good choice for wrapping property values in for pure components.
+This optimization works best if the values are never updated by the children, and even better, if they are rarely updated by parents. This makes `Rc<_>s` a good choice for wrapping property values in for pure components. 
+
+{% hint style="info" %}
+The Rust Book has a [chapter on smart pointers](https://doc.rust-lang.org/stable/book/ch15-00-smart-pointers.html).
+{% endhint %}
 
 ## View Functions
 
-For code readability reasons, it often makes sense to migrate sections of `html!` to their own functions so you can avoid the rightward drift present in deeply nested HTML.
+As you write code which uses the `html!` macro you may find that your code becomes progressively harder to read as you add more code to your component because the amount of indentation increases hugely.
 
-## Pure Components/Function Components
+```rust
+html! {
+    <>
+        <div class="something">
+            <div class="something-child">
+                <h1>{"Some child"}</h1>
+                <div class="something-child-child">
+                    <h4>{"Final thing."}</h4>
+                </div>
+            </div>
+            <a href="#">{"Some link"}</a>
+        </div>
+    </>
+}
+```
 
-Pure components are components that don't mutate their state, only displaying content and propagating messages up to normal, mutable components. They differ from view functions in that they can be used from within the `html!` macro using the component syntax \(`<SomePureComponent />`\) instead of expression syntax \(`{some_view_function()}`\), and that depending on their implementation, they can be memoized - preventing re-renders for identical props using aforementioned `neq_assign` logic.
+To make code easier to read, code in `html!` macro calls can be split up into different functions and which can then be called from the `view` function. 
 
-Yew doesn't natively support pure or function components, but they are available via external crates.
+```rust
+fn something() -> Html {
+    html! {
+        <div class="something">
+            {something_child()}
+            <a href="#">{"Some link"}</a>
+        </div>
+    }
+}
+fn something_child() -> Html {
+    html! {
+        <div class="something-child">
+            <h1>{"Some child"}</h1>
+            {something_child_child()}
+        </div>
+    }
+}
+fn something_child_child() -> Html {
+    html! {
+        <div class="something-child-child">
+            <h4>{"Final thing"}</h4>
+        </div>
+    }
+}
+```
 
-Function components don't exist yet, but in theory, pure components could be generated by using proc macros and annotating functions.
+## Pure Components/Functional Components
+
+Pure components are components which don't mutate their state, only displaying content and propagating messages up to normal, mutable components. They differ from view functions in that they can be used from within the `html!` macro using the component syntax \(`<SomePureComponent />`\) instead of expression syntax \(`{some_view_function()}`\), and that depending on their implementation, they can be memoized - preventing re-renders for identical props using the aforementioned `neq_assign` logic.
+
+Yew doesn't natively support pure or functional components, but they are available via external crates.
+
+Functional components don't exist yet, but in theory, pure components could be generated by using proc macros and annotating functions.
 
 ## Keyed DOM nodes when they arrive
 
 ## Compile speed optimizations using Cargo Workspaces
 
-Arguabley, the largest drawback to using Yew is the long time it takes to compile. Compile time seems to correlate with the quantity of code found within `html!` macro blocks. This tends to not be a significant problem for smaller projects, but for webapps that span multiple pages, it makes sense to break apart your code across multiple crates to minimize the amount of work the compiler has to do.
+Arguably, the greatest drawback to using Yew are the long compile times. Compile time seems to correlate with the quantity of code found within `html!` macro blocks. For smaller projects this is unlikely to be a problem, but for larger webapps which span multiple pages, it makes sense to break apart your code across multiple crates to minimize the amount of work the compiler has to do.
 
 You should try to make your main crate handle routing/page selection, move all commonly shared code to another crate, and then make a different crate for each page, where each page could be a different component, or just a big function that produces `Html`. In the best case scenario, you go from rebuilding all of your code on each compile to rebuilding only the main crate, and one of your page crates. In the worst case, where you edit something in the "common" crate, you will be right back to where you started: compiling all code that depends on that commonly shared crate, which is probably everything else.
 
@@ -92,12 +140,13 @@ If your main crate is too heavyweight, or you want to rapidly iterate on a deepl
 
 ## Build size optimization
 
-* optimize Rust code
-  * `wee_aloc` \( using tiny allocator \)
-  * `cargo.toml` \( defining release profile \)
-* optimize wasm code using `wasm-opt`
+- optimize Rust code
+  - `wee_aloc` ( using tiny allocator )
+  - `cargo.toml` ( defining release profile )
+- optimize wasm code using `wasm-opt`
 
 More information about code size profiling: [rustwasm book](https://rustwasm.github.io/book/reference/code-size.html#optimizing-builds-for-code-size)
+
 
 ### wee\_alloc
 
@@ -117,7 +166,7 @@ It is possible to setup release build for smaller size using `[profile.release]`
 
 [Rust profiles documentation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
-```text
+```toml
 [profile.release]
 # less code to include into binary
 panic = 'abort' 
@@ -128,31 +177,31 @@ opt-level = 'z'
 # optimization for size 
 # opt-level = 's' 
 # link time optimization using using whole-program analysis
-lto = true
+lto = true 
 ```
 
 ### wasm-opt
 
-Further more it is possible to optimize size of `wasm` code.
+Further more it is possible to reduce the size of Wasm code.
 
 wasm-opt info: [binaryen project](https://github.com/WebAssembly/binaryen)
 
-The Rust Wasm book features a section about reducing the size of WASM binaries: [Shrinking .wasm size](https://rustwasm.github.io/book/game-of-life/code-size.html)
+The Rust Wasm book features a section about reducing the size of Wasm binaries: [Shrinking .wasm size](https://rustwasm.github.io/book/game-of-life/code-size.html)
 
-* using `wasm-pack` which by default optimizes `wasm` code in release builds
-* using `wasm-opt` directly on `wasm` files.
+- using `wasm-pack` which by default optimizes `wasm` code in release builds
+- using `wasm-opt` directly on `wasm` files.
 
-```text
+```
 wasm-opt wasm_bg.wasm -Os -o wasm_bg_opt.wasm
 ```
 
-#### Build size of 'minimal' example in yew/examples/
+#### Build size of the 'minimal' example in `yew/examples`
 
-Note: `wasm-pack` combines optimization for Rust and wasm code. `wasm-bindgen` is in this example without any `Rust` size optimization.
+Note: `wasm-pack` combines optimization for Rust and Wasm code. `wasm-bindgen` is in this example without any `Rust` size optimization.
 
-| used tool | size |
-| :--- | :--- |
-| wasm-bindgen | 158KB |
-| wasm-binggen + wasm-opt -Os | 116KB |
-| wasm-pack | 99 KB |
 
+| used tool                   | size 
+| ---                         | ---
+| wasm-bindgen                | 158KB  
+| wasm-binggen + wasm-opt -Os | 116KB 
+| wasm-pack                   | 99 KB
