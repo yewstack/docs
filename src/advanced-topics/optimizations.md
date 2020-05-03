@@ -32,17 +32,7 @@ impl Example {
 ```
 {% endcode %}
 
-The trait is called `NeqAssign` because it assigns the value of the new props to `self.props` if the values of the new props and the existing props are not the same.
-
-This is even shorter than a naive implementation which always updates the props, even if they are the same:
-
-```rust
-// Don't do this, unless you can't avoid it.
-fn change(&mut self, props: Self::Properties) -> ShouldRender {
-    self.props = props;
-    true
-}
-```
+But we can go further! This is six lines of boilerplate can be reduced down to one by using a trait and a blanket implementation for anything that implements `PartialEq`. Check out the `yewtil` crate's [`NeqAssign` trait](https://docs.rs/yewtil/*/yewtil/trait.NeqAssign.html).
 
 You aren't limited to using this in the `change` method. It often makes sense to do this in the `update` method as well, although the performance gains are not as obvious there.
 
