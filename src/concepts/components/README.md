@@ -4,7 +4,7 @@ description: Components and their lifecycle hooks
 
 # Components
 
-## What are Components?
+## What are Components
 
 Components are the building blocks of Yew. They manage their own state and can render themselves to the DOM. Components are created by implementing the `Component` trait which describes the lifecycle of a component.
 
@@ -44,7 +44,7 @@ impl Component for SimpleComponent {
 
 This component could be invoked in your page like this:
 
-```rust
+```html
     ...
         <SimpleComponent />
     ...

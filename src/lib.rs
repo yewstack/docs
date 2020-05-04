@@ -15,6 +15,22 @@ fn test_optimizations() {
 }
 
 #[wasm_bindgen_test]
-fn test_properties() {
+fn test_components_properties() {
     doctest!("concepts/components/properties.md");
+}
+#[wasm_bindgen_test]
+fn test_components_emitevents() {
+    doctest!("concepts/components/emitevents.md");
+}
+#[wasm_bindgen_test]
+fn test_components_internalstate() {
+    doctest!("concepts/components/internalstate.md");
+}
+#[wasm_bindgen_test]
+fn test_components_trapevents() {
+    doctest!("concepts/components/trapevents.md");
+}
+#[wasm_bindgen_test]
+fn test_components_readme() {
+    doctest!("concepts/components/readme.md");
 }

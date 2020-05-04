@@ -24,4 +24,3 @@ html! {
 // In update
 let has_attributes = self.node_ref.try_into::<Element>().has_attributes();
 ```
-
