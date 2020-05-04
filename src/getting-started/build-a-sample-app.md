@@ -3,7 +3,7 @@
 First create a new binary project:
 
 ```bash
-cargo new --bin yew-app && cd yew-app
+cargo new yew-app && cd yew-app
 ```
 
 Add `yew` and `wasm-bindgen` to your dependencies \(refer [here](https://docs.rs/yew) for the latest version\)
@@ -84,7 +84,7 @@ pub fn run_app() {
 
 This template sets up your root `Component`, called `Model` which shows a button that updates itself when you click it. Take special note of `App::<Model>::new().mount_to_body()` inside `main()` which starts your app and mounts it to the page's `<body>` tag. If you would like to start your application with any dynamic properties, you can instead use `App::<Model>::new().mount_to_body_with_props(..)`.
 
-Finally, add an `index.html` file under a new `static` folder for your app.
+Finally, add an `index.html` file into a new folder named `static` in your app.
 
 ```bash
 mkdir static
@@ -109,13 +109,14 @@ mkdir static
 
 ## Run your App!
 
-Using [`wasm-pack`](https://rustwasm.github.io/docs/wasm-pack/) is the preferred way to get up and running. If you haven't already, install the tool with `cargo install wasm-pack` and then build and start a development server by running:
+Using [`wasm-pack`](https://rustwasm.github.io/docs/wasm-pack/) is the preferred way to get up and running.
+If you haven't already, install `wasm-pack` with `cargo install wasm-pack` and then build and start a development server by running:
 
 ```bash
 wasm-pack build --target web --out-name wasm --out-dir ./static
 ```
 
-`wasm-pack` generates a bundle in the `./static` directory with your app's compiled WebAssembly along with a JavaScript wrapper which can be used to start your application.
+`wasm-pack` generates a bundle in the `./static` directory with your app's compiled WebAssembly along with a JavaScript wrapper which will load your application's WebAssembly binary and run it.
 
 Then, use your favorite web server to server the files under `./static`. For example:
 
