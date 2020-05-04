@@ -32,5 +32,5 @@ fn test_components_trapevents() {
 }
 #[wasm_bindgen_test]
 fn test_components_readme() {
-    doctest!("concepts/components/readme.md");
+    doctest!("concepts/components/README.md");
 }
