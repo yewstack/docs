@@ -121,6 +121,7 @@ wasm-pack build --target web --out-name wasm --out-dir ./static
 Then, use your favorite web server to server the files under `./static`. For example:
 
 ```bash
-python -m http.server 8000 --directory static
+cargo +nightly install miniserver
+miniserve ./static --index index.html
 ```
 
