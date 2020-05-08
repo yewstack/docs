@@ -1,3 +1,4 @@
+# Nested component
 ---
 description: Create complex layouts with component hierarchies
 ---
