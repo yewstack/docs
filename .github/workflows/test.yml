@@ -10,5 +10,7 @@ jobs:
         with:
           toolchain: stable
           target: wasm32-unknown-unknown
-      - name: Run tests
-        run: cargo test
+      - name: Install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
+      - name: Run doctest
+        run: wasm-pack test --node
