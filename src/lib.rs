@@ -21,7 +21,7 @@ fn test_properties() {
 
 #[wasm_bindgen_test]
 fn test_component_readme() {
-    doctest!("concepts/components/readme.md");
+    doctest!("concepts/components/README.md");
 }
 
 #[wasm_bindgen_test]
