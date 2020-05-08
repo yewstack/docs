@@ -18,13 +18,3 @@ fn test_optimizations() {
 fn test_properties() {
     doctest!("concepts/components/properties.md");
 }
-
-#[wasm_bindgen_test]
-fn test_component_readme() {
-    doctest!("concepts/components/readme.md");
-}
-
-#[wasm_bindgen_test]
-fn test_component_internalstate() {
-    doctest!("concepts/components/internalstate.md");
-}
