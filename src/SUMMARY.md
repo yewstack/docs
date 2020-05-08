@@ -21,6 +21,7 @@
   * [Literals & Expressions](concepts/html/literals-and-expressions.md)
   * [Components](concepts/html/components.md)
 * [Components](concepts/components/README.md)
+  * [Internal state](concepts/components/internalstate.md)
   * [Properties](concepts/components/properties.md)
   * [Callbacks](concepts/components/callbacks.md)
   * [Refs](concepts/components/refs.md)
