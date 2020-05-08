@@ -106,7 +106,8 @@ impl Component for FetchServiceExample {
                 // 2. construct a callback
                 let callback = self.link.callback(|response: Response<Json<Result<ISS, anyhow::Error>>>| {
                     // split up the response into the HTTP data about the request result and data from the request
-                    let (meta, Json(data)) = response.into_parts();
+                    // Json(data) has type `Json<Result<ISS, anyhow::Error>>`
+                    let (meta, Json(Ok(data))) = response.into_parts(); 
                     if meta.status.is_success() && data.message == "success" {
                         Self::Message::ReceiveLocation(match data {
                             Ok(d) => d,
@@ -126,7 +127,7 @@ impl Component for FetchServiceExample {
             ReceiveLocation(location) => {
                 self.iss = location;
                 self.fetching = false;
-                // we want to redraw so that the page no longer says 'fetching...'
+                // we want to redraw so that the page displays the location of the ISS instead of 'fetching...'
                 true
             }
             _ => false
