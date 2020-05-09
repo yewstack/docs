@@ -27,7 +27,7 @@
   * [Nested component](concepts/components/nestedcomponents.md)
   * [Refs](concepts/components/refs.md)
   * [Styling](concepts/components/styling.md)
-  * [Life cycle](concepts/components/lifecycle.md)
+  * [Lifecycle](concepts/components/lifecycle.md)
   * [Callbacks](concepts/components/callbacks.md)
 * [Agents](concepts/agents.md)
 * [Services](concepts/services/README.md)
