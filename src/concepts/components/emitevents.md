@@ -4,13 +4,13 @@ description: Component could share update to the parent html component emit even
 
 # Emit events
 
-It's possible to update the parent containers emitting **events** by the same way we received data via **properties**.
+It's possible to update the parent containers emitting **events** in the same way we received data via **properties**.
 
 The events are defined as part of the `Properties` struct.
 
 When it's needed you just need to call the `emit()` method of the event, to propagate the update to the parents containers.
 
-> You could name the event as you want. It's usually started by "on"
+> You can name the event as you want. It's usually started by "on"
 
 ```rust
 use yew::prelude::*;
@@ -155,7 +155,7 @@ pub struct Props{
 #         } else {
 #             html! {
 #                 <>
-#                     {"Click on clark to raised an event for the parent container ;-)"}
+#                     {"Click on clark to raise an event for the parent container ;-)"}
 #                     <h1 onclick=self.link.callback( |_| Msg::Click4Event()) >
 #                     {format!("Hello {}",self.name)}</h1>
 #                 </>
@@ -327,7 +327,7 @@ pub struct Props{
 
 ```
 
-Like for the properties a compilatioin error will be raised in case you omitted to bind a mandatory event. The message could be something like:
+Like for the properties a compilation error will be raised in case you omitted to bind a mandatory event. The message could be something like:
 
 > no method named `build` found for struct `components::comp4::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>` in the current scope
 > method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
