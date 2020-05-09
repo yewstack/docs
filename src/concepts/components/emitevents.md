@@ -1,16 +1,16 @@
 ---
-description: Component could share update to the parent html component emit events
+description: Component could share update to the parent html component emitting events
 ---
 
 # Emit events
 
-It's possible to update the parent containers emitting **events** in the same way we received data via **properties**.
+It's possible to update the parent html component emitting **events** in the same way we received data via **properties**.
 
 The events are defined as part of the `Properties` struct.
 
 When it's needed you just need to call the `emit()` method of the event, to propagate the update to the parents containers.
 
-> You can name the event as you want. It's usually started by "on"
+> You can name the event however you want to. It's usually started by "on"
 
 ```rust
 use yew::prelude::*;
