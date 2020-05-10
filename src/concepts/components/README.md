@@ -1,5 +1,5 @@
 ---
-description: Components and their lifecycle hooks
+description: Introduction of Yew component
 ---
 
 # Components
@@ -18,7 +18,7 @@ pub struct ExampleComponent {
     name: String,
     show_message: bool,
 
-    // properties and events bag
+    // properties and events struct
     props: Props,
 
     // link field supports the mechanism through which components are able to register callbacks and update themselves
@@ -27,7 +27,7 @@ pub struct ExampleComponent {
 
 // enum of "Messages" that will be used to mutate the component state
 pub enum Msg {
-    Click(),
+    Click,
 }
 
 // definition of properties and events of the component
@@ -54,18 +54,18 @@ impl Component for ExampleComponent {
         }
     }
 
-    // This method is executed each time the link.callbacks is called 
+    // This method is executed each time the link.callbacks is called
     // you can mutate the state based on the message received
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
 
             // mutate the component state
-            Msg::Click() => self.show_message = true,
+            Msg::Click => self.show_message = true,
         }
         true
     }
 
-    // mutate state if the properties bag is changed
+    // you can use change method to decide if you would like to re-render when properties change 
     fn change(&mut self, props: Self::Properties) -> ShouldRender {
         if self.props != props {
             self.props = props;
@@ -76,18 +76,17 @@ impl Component for ExampleComponent {
     }
 
     // Rendering of the component
-    // The method is called when 'ShouldRender' is 'true' as return of update and change method
     fn view(&self) -> Html {
         // different rendering depend on the component state
         if !self.show_message {
             html! {
-                // trap HTML events and trigger a message that will be managed in the update method
-                <button onclick=self.link.callback( |_| Msg::Click() )>{"Click to say hello!"}</button>
+                // Listen to HTML events and trigger a message that will be managed in the update method
+                <button onclick=self.link.callback( |_| Msg::Click )>{"Click to say hello!"}</button>
             }
         } else {
             html! {
                 // Use state value in the html
-                <h1>{format!("Hello {}",self.name)}</h1>
+                <h1>{format!("Hello {}", self.name)}</h1>
             }
         }
     }
