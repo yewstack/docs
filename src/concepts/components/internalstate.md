@@ -1,13 +1,11 @@
 ---
-description: Component can maintain it's own state and render information depending on it
+description: A component can maintain its own state and render information depending on it
 ---
 
-# Internal State
+# Internal state
 
-The component can manage it's own state using the Rust struct that implement the trait `Component`. The HTML rendering is based on this state.
-When state change there is possibility to re-render the component.
-
-> TODO documentation on state mutation
+The component can manage it's own state using a struct that implement the trait `Component`. The HTML rendering is based on this state.
+When the state change the component might be re-rendered.
 
 ```rust
 use yew::prelude::*;
@@ -27,11 +25,11 @@ impl Component for InternalStateComponent {
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-        true
+        false
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-        true
+        false
     }
 
     fn view(&self) -> Html {
@@ -44,46 +42,16 @@ impl Component for InternalStateComponent {
 }
 ```
 
-## State definition
+## Defining state
 
-Here we add the `name` field in the struct
+Here we add the `name` field to the struct
 
 ```rust
-# use yew::prelude::*;
-#
 // ...
 pub struct InternalStateComponent {
     name:String,
 }
 // ...
-#
-# impl Component for InternalStateComponent {
-#     type Message = ();
-#     type Properties = ();
-#
-#     fn create(_props: Self::Properties, _link: ComponentLink<Self>) -> Self {
-#         Self {
-#             name: "Clark".into(),
-#         }
-#     }
-#
-#     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-#         true
-#     }
-#
-#     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-#         true
-#     }
-#
-#     fn view(&self) -> Html {
-#         html! {
-#             <>
-#                 <h1>{format!("Hello {}",self.name)}</h1>
-#             </>
-#         }
-#     }
-# }
-
 ```
 
 ## State initialization
@@ -91,15 +59,6 @@ pub struct InternalStateComponent {
 The component lifecycle will initialize the state in the `create` method.
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct InternalStateComponent {
-#     name:String,
-# }
-#
-# impl Component for InternalStateComponent {
-#     type Message = ();
-#     type Properties = ();
 // ...
     fn create(_props: Self::Properties, _link: ComponentLink<Self>) -> Self {
         Self {
@@ -107,61 +66,19 @@ The component lifecycle will initialize the state in the `create` method.
         }
     }
 // ...
-#     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-#         true
-#     }
-#
-#     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-#         true
-#     }
-#
-#     fn view(&self) -> Html {
-#         html! {
-#             <>
-#                 <h1>{format!("Hello {}",self.name)}</h1>
-#             </>
-#         }
-#     }
-# }
 ```
 
-## Rendering based on the state value
+## Rendering using the state
 
-Using the `html!` macro we can render html based on the component state in the `view` method
+Using the `html!` macro we can render html using the state from the `view` method
 
-> please refer to the `html!` macro documentation page for more detail on the HTML rendering
+> please refer to the `html!` macro documentation page for more detail on how to render components as HTML
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct InternalStateComponent {
-#     name:String,
-# }
-#
-# impl Component for InternalStateComponent {
-#     type Message = ();
-#     type Properties = ();
-#
-#     fn create(_props: Self::Properties, _link: ComponentLink<Self>) -> Self {
-#         Self {
-#             name: "Clark".into(),
-#         }
-#     }
-#
-#     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-#         true
-#     }
-#
-#     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
-#         true
-#     }
-#
 // ...
     fn view(&self) -> Html {
         html! {
-            <>
-                <h1>{format!("Hello {}",self.name)}</h1>
-            </>
+            <h1>{format!("Hello {}", self.name)}</h1>
         }
     }
 // ...
