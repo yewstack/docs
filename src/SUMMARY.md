@@ -21,7 +21,7 @@
   * [Literals & Expressions](concepts/html/literals-and-expressions.md)
 * [Components](concepts/components/README.md)
   * [Internal State](concepts/components/internalstate.md)
-  * [Trap events](concepts/components/trapevents.md)
+  * [Listen to events](concepts/components/trapevents.md)
   * [Properties](concepts/components/properties.md)
   * [Emit events](concepts/components/emitevents.md)
   * [Nested component](concepts/components/nestedcomponents.md)
