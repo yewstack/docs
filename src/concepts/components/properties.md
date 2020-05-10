@@ -4,23 +4,19 @@ description: The component could expose property attributes to receive data from
 
 # Properties
 
-It is a common need to receive data from the parent component using properties.
+It’s good practice to divide up your application into multiple components and split them across different files. As your application becomes larger, this quickly becomes essential. For these components to be able to communicate with each other, components have properties – these are values which parent components pass to child components.
 
-The properties are defined in a dedicated Rust struct derivating `Properties` and `Clone`traits.
+A component's properties should be defined using a separate struct which derives `Properties` and `Clone` traits.
 
-> This struct is usually named `Props`
+> The `Properties` trait requires that the `Clone` trait is implemented for all types for which `Properties` is derived.
 
-The properties bag is attached to the state adding the field `props` in the component struct and defining the `Properties` `Type` in the component trait implementation.
+> It is common for this struct to be named `Props`
 
-The properties have to be intialized in the `create` method. As for `link`, the framework push to the method the bag of the properties and can be used to attach it to the internal state.
-
-It' possible to define some attributes to the properties as:
+Properties may be defined as:
 
 - optional and initialized with Rust default value
-- optional and initialieed with component default value
+- optional and initialized with component default value
 - mandatory, the parent must define a value for the attribute
-
-> remark: for convenience and/or performance optimization `Props` can derive `PartialEq` to avoid to re-render if there is no changed.cf. `change` method
 
 ```rust
 use yew::prelude::*;
@@ -101,7 +97,7 @@ In order to use this component you have to:
 
 ```
 
-## Define the properties structure
+## Defining the properties struct
 
 ```rust
 # use yew::prelude::*;
@@ -172,7 +168,7 @@ pub struct Props{
 
 ```
 
-## Attach the property bag in the state
+## Attaching the properties to the state
 
 ```rust
 # use yew::prelude::*;
@@ -242,7 +238,7 @@ pub struct UseOfPropertyComponent {
 
 ```
 
-## Initialize the properties
+## Initializing the properties
 
 ```rust
 # use yew::prelude::*;
@@ -312,17 +308,11 @@ pub struct UseOfPropertyComponent {
 
 ```
 
-> Here, to simply extend the previous example, we `.clone()` the `props` argument. It may not be needed in your code
+> Here, to simply extend the previous example, we clone the value of the `props` argument. It may not be needed in your code
 
-## Mandatory property
+## Defining property attributes
 
-In this example the property have to be defined using the component. If it's omitted a compilatioin error is raised. The error looks like:
-
-> no method named `build` found for struct `components::comp4::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>` in the current scope
-> method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
-comp4.rs(14, 10): method `build` not found for this`
-
-## Optional property
+### Optional property
 
 Property can be defined optional just adding `#[prop_or_default]` on the property. In that case the property value will be initialized by the default Rust type value.
 
@@ -400,9 +390,9 @@ pub struct Props{
 
 In that case we will just say "Hello" ;-)
 
-## Optional property with component default value
+### Optional property with component default value
 
-Property can be defined optional but adding a default component value adding `#[prop_or_(your_default_value)]` on the property.
+A property can be defined as an optional property. In this case, it becomes necessary to define a default component value. Yew will automatically use this value if it is not provided when the component is initialized. Such properties should be annotated with the #[prop_or_(default_value)] attribute where default_value specifies the value which Yew should use.
 
 ```rust
 # use yew::prelude::*;
@@ -475,9 +465,18 @@ pub struct Props{
 
 In that case we will say "Hello Clark by default" ;-)
 
-## Optimize rendering in the `change` method
+### Mandatory property
 
-In order to avoid unecessary rendring it's possible to compare the mutation of the `props` bag in the `change` method.
+If no attribute is defined the property will be "mandatory". So, if the property is omitted a compilation error is raised. The error looks like:
+
+> no method named `build` found for struct `components::comp4::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>` in the current scope
+> method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
+comp4.rs(14, 10): method `build` not found for this`
+
+
+## Optimizing rendering in the `change` method
+
+In order to avoid unecessary rendering it's possible to compare the mutation of the `props` bag in the `change` method.
 This optimization imply to derive `PartialEq` for the `Props` struct to easily compare the `props` bag passed as argument of the method and the one in the internal state of the component.
 
 ```rust
