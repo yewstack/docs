@@ -29,7 +29,7 @@ pub struct UseOfPropertyComponent {
 }
 
 pub enum Msg {
-    Click(),
+    Click,
 }
 
 #[derive(Properties, Clone, PartialEq)]
@@ -52,7 +52,7 @@ impl Component for UseOfPropertyComponent {
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
-            Msg::Click() => self.show_message = true,
+            Msg::Click => self.show_message = true,
         }
         true
     }
@@ -69,15 +69,11 @@ impl Component for UseOfPropertyComponent {
     fn view(&self) -> Html {
         if !self.show_message {
             html! {
-                <>
-                    <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"}</button>
-                </>
+                <button onclick=self.link.callback( |_| Msg::Click )>{"Click here!"}</button>
             }
         } else {
             html! {
-                <>
-                    <h1>{format!("Hello {}",self.name)}</h1>
-                </>
+                <h1>{format!("Hello {}",self.name)}</h1>
             }
         }
     }
@@ -100,19 +96,6 @@ In order to use this component you have to:
 ## Defining the properties struct
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct UseOfPropertyComponent {
-#     link: ComponentLink<Self>,
-#     props: Props,
-#     name: String,
-#     show_message: bool,
-# }
-#
-# pub enum Msg {
-#     Click(),
-# }
-
 // ...
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props{
@@ -120,58 +103,11 @@ pub struct Props{
 }
 // ...
 
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
-#
-#     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
-#         Self {
-#             link,
-#             props: props.clone(),
-#             name: props.name.into(),
-#             show_message: false,
-#         }
-#     }
-#
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
-#
-#     fn change(&mut self, props: Self::Properties) -> ShouldRender {
-#         if self.props != props {
-#             self.props = props;
-#             true
-#         } else {
-#             false
-#         }
-#     }
-#
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
-
 ```
 
 ## Attaching the properties to the state
 
 ```rust
-# use yew::prelude::*;
 // ...
 pub struct UseOfPropertyComponent {
     link: ComponentLink<Self>,
@@ -180,88 +116,11 @@ pub struct UseOfPropertyComponent {
     show_message: bool,
 }
 // ...
-#
-# pub enum Msg {
-#     Click(),
-# }
-#
-# #[derive(Properties, Clone, PartialEq)]
-# pub struct Props{
-#     pub name: String,
-# }
-#
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
-#
-#     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
-#         Self {
-#             link,
-#             props: props.clone(),
-#             name: props.name.into(),
-#             show_message: false,
-#         }
-#     }
-#
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
-#
-#     fn change(&mut self, props: Self::Properties) -> ShouldRender {
-#         if self.props != props {
-#             self.props = props;
-#             true
-#         } else {
-#             false
-#         }
-#     }
-#
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
-
 ```
 
 ## Initializing the properties
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct UseOfPropertyComponent {
-#     link: ComponentLink<Self>,
-#     props: Props,
-#     name: String,
-#     show_message: bool,
-# }
-#
-# pub enum Msg {
-#     Click(),
-# }
-#
-# #[derive(Properties, Clone, PartialEq)]
-# pub struct Props{
-#     pub name: String,
-# }
-#
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
 // ...
     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
         Self {
@@ -272,40 +131,6 @@ pub struct UseOfPropertyComponent {
         }
     }
 // ...
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
-#
-#
-#    fn change(&mut self, props: Self::Properties) -> ShouldRender {
-#        if self.props != props {
-#            self.props = props;
-#            true
-#        } else {
-#            false
-#        }
-#    }
-#
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
-
 ```
 
 > Here, to simply extend the previous example, we clone the value of the `props` argument. It may not be needed in your code
@@ -317,19 +142,6 @@ pub struct UseOfPropertyComponent {
 Property can be defined optional just adding `#[prop_or_default]` on the property. In that case the property value will be initialized by the default Rust type value.
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct UseOfPropertyComponent {
-#     link: ComponentLink<Self>,
-#     props: Props,
-#     name: String,
-#     show_message: bool,
-# }
-#
-# pub enum Msg {
-#     Click(),
-# }
-
 // ...
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props{
@@ -337,54 +149,6 @@ pub struct Props{
     pub name: String,
 }
 // ...
-
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
-#
-#     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
-#         Self {
-#             link,
-#             props: props.clone(),
-#             name: props.name.into(),
-#             show_message: false,
-#         }
-#     }
-#
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
-#
-#     fn change(&mut self, props: Self::Properties) -> ShouldRender {
-#         if self.props != props {
-#             self.props = props;
-#             true
-#         } else {
-#             false
-#         }
-#     }
-#
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
-
-
 
 ```
 
@@ -395,19 +159,6 @@ In that case we will just say "Hello" ;-)
 A property can be defined as an optional property. In this case, it becomes necessary to define a default component value. Yew will automatically use this value if it is not provided when the component is initialized. Such properties should be annotated with the #[prop_or_(default_value)] attribute where default_value specifies the value which Yew should use.
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct UseOfPropertyComponent {
-#     link: ComponentLink<Self>,
-#     props: Props,
-#     name: String,
-#     show_message: bool,
-# }
-#
-# pub enum Msg {
-#     Click(),
-# }
-#
 // ...
 #[derive(Properties, Clone, PartialEq)]
 pub struct Props{
@@ -415,52 +166,6 @@ pub struct Props{
     pub name: String,
 }
 // ...
-#
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
-#
-#     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
-#         Self {
-#             link,
-#             props: props.clone(),
-#             name: props.name.into(),
-#             show_message: false,
-#         }
-#     }
-#
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
-#
-#     fn change(&mut self, props: Self::Properties) -> ShouldRender {
-#         if self.props != props {
-#             self.props = props;
-#             true
-#         } else {
-#             false
-#         }
-#     }
-#
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
 ```
 
 In that case we will say "Hello Clark by default" ;-)
@@ -473,50 +178,12 @@ If no attribute is defined the property will be "mandatory". So, if the property
 > method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
 comp4.rs(14, 10): method `build` not found for this`
 
-
 ## Optimizing rendering in the `change` method
 
 In order to avoid unecessary rendering it's possible to compare the mutation of the `props` bag in the `change` method.
 This optimization imply to derive `PartialEq` for the `Props` struct to easily compare the `props` bag passed as argument of the method and the one in the internal state of the component.
 
 ```rust
-# use yew::prelude::*;
-#
-# pub struct UseOfPropertyComponent {
-#     link: ComponentLink<Self>,
-#     props: Props,
-#     name: String,
-#     show_message: bool,
-# }
-#
-# pub enum Msg {
-#     Click(),
-# }
-#
-# #[derive(Properties, Clone, PartialEq)]
-# pub struct Props{
-#     pub name: String,
-# }
-#
-# impl Component for UseOfPropertyComponent {
-#     type Message = Msg;
-#     type Properties = Props;
-#
-#     fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
-#         Self {
-#             link,
-#             props: props.clone(),
-#             name: props.name.into(),
-#             show_message: false,
-#         }
-#     }
-#
-#     fn update(&mut self, msg: Self::Message) -> ShouldRender {
-#         match msg {
-#             Msg::Click() => self.show_message = true,
-#         }
-#         true
-#     }
 // ...
      fn change(&mut self, props: Self::Properties) -> ShouldRender {
          if self.props != props {
@@ -528,22 +195,6 @@ This optimization imply to derive `PartialEq` for the `Props` struct to easily c
      }
 // ...
 
-#     fn view(&self) -> Html {
-#         if !self.show_message {
-#             html! {
-#                 <>
-#                     <button onclick=self.link.callback( |_| Msg::Click() )>{"Click here!"} </button>
-#                 </>
-#             }
-#         } else {
-#             html! {
-#                 <>
-#                     <h1>{format!("Hello {}",self.name)}</h1>
-#                 </>
-#             }
-#         }
-#     }
-# }
 ```
 
 ## Memory/speed overhead of using Properties
