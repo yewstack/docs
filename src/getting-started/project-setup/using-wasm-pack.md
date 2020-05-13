@@ -15,7 +15,7 @@ cargo install wasm-pack
 ### Set up your project
 
 {% hint style="info" %}
-If you start from the [yew-wasm-pack-minimal](https://github.com/yewstack/yew-wasm-pack-minimal) template, these setup steps are already taken care of.
+If you use the [yew-wasm-pack-minimal](https://github.com/yewstack/yew-wasm-pack-minimal) template, these setup steps are already taken care of.
 {% endhint %}
 
 * Add a minimal `index.html` file to your project root:
