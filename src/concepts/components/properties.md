@@ -1,26 +1,201 @@
 ---
-description: Parent to child communication
+description: The component could expose property attributes to receive data from the parent html component
 ---
 
 # Properties
 
-Properties enable child and parent components to communicate with each other.
+It’s good practice to divide up your application into multiple components and split them across different files. As your application becomes larger, this quickly becomes essential. For these components to be able to communicate with each other, components have properties – these are values which parent components pass to child components.
 
-## Derive macro
+A component's properties should be defined using a separate struct which derives `Properties` and `Clone` traits.
 
-Don't try to implement `Properties` yourself, derive it by using `#[derive(Properties)]` instead.
+> The `Properties` trait requires that the `Clone` trait is implemented for all types for which `Properties` is derived.
 
-{% hint style="info" %}
-Types for which you derive `Properties` must also implement `Clone`. This can be done by either using `#[derive(Properties, Clone)` or manually implementing `Clone` for your type.
-{% endhint %}
+> It is common for this struct to be named `Props`
 
-### Required attributes
+Properties may be defined as:
 
-The fields within a struct that derives `Properties` are required by default. When a field is missing and the component is created in the `html!` macro, a compiler error is returned. For fields with optional properties, use the `#[prop_or_default]` attribute to use the default value for that type when the prop is not specified. To specify a value, use the `#[prop_or_else(value)]` attribute where value is the default value for the property. For example, to default a boolean value as `true`, use the attribute `#[prop_or_else(true)]`. It is common for optional properties to use the `Option` enum which has the default value `None`.
+- optional and initialized with Rust default value
+- optional and initialized with component default value
+- mandatory, the parent must define a value for the attribute
 
-### PartialEq
+```rust
+use yew::prelude::*;
 
-It is likely to make sense to derive `PartialEq` on your props if you can do this. Using `PartialEq` makes it much easier to avoid unnecessary rerendering \(this is explained in the **Optimizations & Best Practices** section\).
+pub struct UseOfPropertyComponent {
+    link: ComponentLink<Self>,
+    props: Props,
+    name: String,
+    show_message: bool,
+}
+
+pub enum Msg {
+    Click,
+}
+
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    pub name: String,
+}
+
+impl Component for UseOfPropertyComponent {
+    type Message = Msg;
+    type Properties = Props;
+
+    fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
+        Self {
+            link,
+            props: props.clone(),
+            name: props.name.into(),
+            show_message: false,
+        }
+    }
+
+    fn update(&mut self, msg: Self::Message) -> ShouldRender {
+        match msg {
+            Msg::Click => self.show_message = true,
+        }
+        true
+    }
+
+    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+        if self.props != props {
+            self.props = props;
+            true
+        } else {
+            false
+        }
+    }
+
+    fn view(&self) -> Html {
+        if !self.show_message {
+            html! {
+                <button onclick=self.link.callback( |_| Msg::Click )>{"Click here!"}</button>
+            }
+        } else {
+            html! {
+                <h1>{format!("Hello {}",self.name)}</h1>
+            }
+        }
+    }
+}
+
+```
+
+In order to use this component you have to:
+
+```html
+// ...
+    <div class="full-height">
+        {"In this example we pass the name as parameter of the Yew component."}
+        <UseOfPropertyComponent name="Clark"/>
+    </div>
+// ...
+
+```
+
+## Defining the properties struct
+
+```rust
+// ...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    pub name: String,
+}
+// ...
+
+```
+
+## Attaching the properties to the state
+
+```rust
+// ...
+pub struct UseOfPropertyComponent {
+    link: ComponentLink<Self>,
+    props: Props,
+    name: String,
+    show_message: bool,
+}
+// ...
+```
+
+## Initializing the properties
+
+```rust
+// ...
+    fn create(props: Self::Properties, link: ComponentLink<Self>) -> Self {
+        Self {
+            link,
+            props: props.clone(),
+            name: props.name.into(),
+            show_message: false,
+        }
+    }
+// ...
+```
+
+> Here, to simply extend the previous example, we clone the value of the `props` argument. It may not be needed in your code
+
+## Defining property attributes
+
+### Optional property
+
+Property can be defined optional just adding `#[prop_or_default]` on the property. In that case the property value will be initialized by the default Rust type value.
+
+```rust
+// ...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    #[prop_or_default]
+    pub name: String,
+}
+// ...
+
+```
+
+In that case we will just say "Hello" ;-)
+
+### Optional property with component default value
+
+A property can be defined as an optional property. In this case, it becomes necessary to define a default component value. Yew will automatically use this value if it is not provided when the component is initialized. Such properties should be annotated with the #[prop_or_(default_value)] attribute where default_value specifies the value which Yew should use.
+
+```rust
+// ...
+#[derive(Properties, Clone, PartialEq)]
+pub struct Props{
+    #[prop_or("Clark by default".to_string())]
+    pub name: String,
+}
+// ...
+```
+
+In that case we will say "Hello Clark by default" ;-)
+
+### Mandatory property
+
+If no attribute is defined the property will be "mandatory". So, if the property is omitted a compilation error is raised. The error looks like:
+
+> no method named `build` found for struct `components::comp4::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>` in the current scope
+> method not found in `...::PropsBuilder<...PropsBuilderStep_missing_required_prop_name>`rustc(E0599)
+comp4.rs(14, 10): method `build` not found for this`
+
+## Optimizing rendering in the `change` method
+
+In order to avoid unecessary rendering it's possible to compare the mutation of the `props` bag in the `change` method.
+This optimization imply to derive `PartialEq` for the `Props` struct to easily compare the `props` bag passed as argument of the method and the one in the internal state of the component.
+
+```rust
+// ...
+     fn change(&mut self, props: Self::Properties) -> ShouldRender {
+         if self.props != props {
+             self.props = props;
+             true
+         } else {
+             false
+         }
+     }
+// ...
+
+```
 
 ## Memory/speed overhead of using Properties
 
@@ -32,7 +207,7 @@ The implication of this is if you would otherwise be passing _huge_ amounts of d
 
 If you won't need to modify the data passed down through props you can wrap it in an `Rc` so that only a reference-counted pointer to the data is cloned, instead of the actual data itself.
 
-## Example
+### Example
 
 ```rust
 use std::rc::Rc;
@@ -72,4 +247,3 @@ pub struct LinkProps {
     active: bool,
 }
 ```
-
