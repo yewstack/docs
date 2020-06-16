@@ -12,8 +12,8 @@ The `html!` macro allows you to write HTML and SVG code declaratively. It is sim
 2. An empty `html! {}` invocation is valid and will not render anything
 3. Literals in element content must always be quoted and wrapped in braces
   * `html! { "Hello, World" }`
-  * `html! { <div>{"Hell, World" }</div> }`
-  * `html! { <div>{ String::from("foo") + "bar" }</div>
+  * `html! { <div>{ "Hell, World" }</div> }`
+  * `html! { <div>{ String::from("foo") + "bar" }</div>`
 4. Quoted attribute values are taken literally
   * `html! { <div> id="bar"</div> }`
 5. Unquoted attribute values are interpreted as expressions
