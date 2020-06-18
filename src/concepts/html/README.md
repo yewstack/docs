@@ -14,7 +14,7 @@ The [`html!`](https://docs.rs/yew/0.16.2/yew/macro.html.html) macro allows you t
   * `html! { "Hello, World" }`
   * `html! { <div>{ "Hell, World" }</div> }`
   * `html! { <div>{ String::from("foo") + "bar" }</div>`
-- Quoted attribute values are taken literally. The value is set at compile-time and does not change at runtime.
+- Quoted attribute values are taken literally. The value is set at compile-time and does not change at run-time.
   * `html! { <div> id="bar"</div> }`
 - Unquoted attribute values are interpreted as expressions and therefore have to be valid Rust expressions.
   * `let foo = "bar"; html! { <div id=foo></div> }`
