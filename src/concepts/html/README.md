@@ -8,6 +8,7 @@ The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro allows you t
 
 **Important notes**
 
+
 - The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro only accepts one root HTML node (you can overcome this by [using fragments or iterators](lists.md))
 - An empty `html! {}` invocation is valid and will not render anything.
 - Literals inside of tags must always be quoted and wrapped with braces (this is different to attribute values - see below)
