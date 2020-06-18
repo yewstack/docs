@@ -20,6 +20,7 @@ The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro allows you t
 - Unquoted attribute values are interpreted as expressions and therefore have to be valid Rust expressions.
   * `let foo = "bar"; html! { <div id=foo></div> }`
   * `html! { <div id=String::from("foo") + "bar"></div> }`
+- HTML tags names need to start with a lowercase letter. Besides that every valid HTML tag name is allowed. If the tag name starts with an uppercase letter it is interpreted as component name and attributes are passed as component properties.
 
 {% hint style="info" %}
 The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro can reach easily the default recursion limit of the compiler. It is advised to bump its value if you encouter compilation errors. Use an attribute like `#![recursion_limit="1024"]` to bypass the problem. See the [official documentation](https://doc.rust-lang.org/reference/attributes/limits.html#the-recursion_limit-attribute) and [this Stack Overflow question](https://stackoverflow.com/questions/27454761/what-is-a-crate-attribute-and-where-do-i-add-it) for details.
