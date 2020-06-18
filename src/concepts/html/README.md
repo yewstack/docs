@@ -10,7 +10,7 @@ The [`html!`](https://docs.rs/yew/0.16.2/yew/macro.html.html) macro allows you t
 
 - The [`html!`](https://docs.rs/yew/0.16.2/yew/macro.html.html) macro only accepts one root HTML node (you can overcome this by [using fragments or iterators](lists.md))
 - An empty `html! {}` invocation is valid and will not render anything.
-- Literals in element content must always be quoted and wrapped in braces (in contrary to attribute values - see below)
+- Literals in element content must always be quoted and wrapped with braces (this is different to attribute values - see below)
   * `html! { "Hello, World" }`
   * `html! { <div>{ "Hell, World" }</div> }`
   * `html! { <div>{ String::from("foo") + "bar" }</div>`
