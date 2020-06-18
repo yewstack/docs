@@ -2,14 +2,14 @@
 description: The procedural macro for generating HTML and SVG
 ---
 
-# Using [`html!`](https://docs.rs/yew/latest/yew/macro.html.html)
+# Using [`html!`][1]
 
-The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro allows you to write HTML and SVG code declaratively. It is similar to JSX \(a Javascript extension which allows you to write HTML code inside of Javascript\).
+The [`html!`][1] macro allows you to write HTML and SVG code declaratively. It is similar to JSX \(a Javascript extension which allows you to write HTML code inside of Javascript\).
 
 **Important notes**
 
 
-- The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro only accepts one root HTML node (you can overcome this by [using fragments or iterators](lists.md))
+- The [`html!`][1] macro only accepts one root HTML node (you can overcome this by [using fragments or iterators](lists.md))
 - An empty `html! {}` invocation is valid and will not render anything.
 - Literals inside of tags must always be quoted and wrapped with braces (this is different to attribute values - see below)
   * `html! { "Hello, World" }`
@@ -23,7 +23,7 @@ The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro allows you t
 - HTML tags names need to start with a lowercase letter. Besides that every valid HTML tag name is allowed. If the tag name starts with an uppercase letter it is interpreted as component name and attributes are passed as component properties.
 
 {% hint style="info" %}
-The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro can reach easily the default recursion limit of the compiler. It is advised to bump its value if you encouter compilation errors. Use an attribute like `#![recursion_limit="1024"]` to bypass the problem. See the [official documentation](https://doc.rust-lang.org/reference/attributes/limits.html#the-recursion_limit-attribute) and [this Stack Overflow question](https://stackoverflow.com/questions/27454761/what-is-a-crate-attribute-and-where-do-i-add-it) for details.
+The [`html!`][1] macro can reach easily the default recursion limit of the compiler. It is advised to bump its value if you encouter compilation errors. Use an attribute like `#![recursion_limit="1024"]` to bypass the problem. See the [official documentation][2] and [this Stack Overflow question][3] for details.
 {% endhint %}
 
 {% page-ref page="lists.md" %}
@@ -33,3 +33,7 @@ The [`html!`](https://docs.rs/yew/latest/yew/macro.html.html) macro can reach ea
 {% page-ref page="literals-and-expressions.md" %}
 
 {% page-ref page="components.md" %}
+
+[1]: https://docs.rs/yew/latest/yew/macro.html.html
+[2]: https://doc.rust-lang.org/reference/attributes/limits.html#the-recursion_limit-attribute
+[3]: https://stackoverflow.com/questions/27454761/what-is-a-crate-attribute-and-where-do-i-add-it
