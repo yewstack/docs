@@ -72,3 +72,5 @@ pub struct LinkProps {
     active: bool,
 }
 ```
+
+How to pass properties to components is demonstrated in [Components](/concepts/html/components.html).
