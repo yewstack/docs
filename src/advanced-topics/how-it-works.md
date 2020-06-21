@@ -1,5 +1,5 @@
 ---
-description: Low level details about the framework
+description: Low level details about the framework.
 ---
 
 # Low-level library internals
