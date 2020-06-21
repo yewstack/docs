@@ -1,5 +1,5 @@
 ---
-description: Yew's official router
+description: Yew's official router.
 ---
 
 # Router
