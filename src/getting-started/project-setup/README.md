@@ -1,5 +1,5 @@
 ---
-description: Set yourself up for success
+description: Set yourself up for success.
 ---
 
 # Project Setup
