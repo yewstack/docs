@@ -1,5 +1,5 @@
 ---
-description: Both HTML and SVG elements are supported.
+description: Both HTML and SVG elements are supported
 ---
 
 # Elements
