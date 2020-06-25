@@ -1,5 +1,5 @@
 ---
-description: Create complex layouts with component hierarchies.
+description: Create complex layouts with component hierarchies
 ---
 
 # Components
