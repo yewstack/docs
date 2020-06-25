@@ -1,5 +1,5 @@
 ---
-description: The procedural macro for generating HTML and SVG.
+description: The procedural macro for generating HTML and SVG
 ---
 
 # Using html!
