@@ -1,5 +1,5 @@
 ---
-description: Parent to child communication.
+description: Parent to child communication
 ---
 
 # Properties
