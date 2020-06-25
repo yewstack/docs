@@ -1,5 +1,5 @@
 ---
-description: Out-of-band DOM access.
+description: Out-of-band DOM access
 ---
 
 # Refs
