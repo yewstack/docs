@@ -1,5 +1,5 @@
 ---
-description: Yew's Actor System.
+description: Yew's Actor System
 ---
 
 # Agents
