@@ -1,5 +1,5 @@
 ---
-description: Components and their lifecycle hooks.
+description: Components and their lifecycle hooks
 ---
 
 # Components
