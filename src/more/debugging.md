@@ -24,7 +24,7 @@ fn main() {
 log::info!("Update: {:?}", msg);
 ```
 
-### [`ConsoleService`](https://docs.rs/yew/0.16.0/yew/services/console/struct.ConsoleService.html)
+### [`ConsoleService`](https://docs.rs/yew/latest/yew/services/console/struct.ConsoleService.html)
 
 This service is included within yew and is available when the `"services"` feature is enabled:
 
