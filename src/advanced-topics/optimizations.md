@@ -1,5 +1,5 @@
 ---
-description: Make your app faster.
+description: Make your app faster
 ---
 
 # Optimizations & Best Practices
@@ -138,7 +138,7 @@ It is possible to setup release build for smaller size using `[profile.release]`
 panic = 'abort' 
 # optimization over all codebase ( better optimization, slower build )
 codegen-units = 1
-# optimization for size ( more aggresive )
+# optimization for size ( more aggressive )
 opt-level = 'z' 
 # optimization for size 
 # opt-level = 's' 
