@@ -36,7 +36,7 @@
 
 ## More
 
-* [CSS](more/css.md)
+* [Static Content](more/static.md)
 * [Roadmap](more/roadmap.md)
 * [Testing](more/testing.md)
 * [Debugging](more/debugging.md)
