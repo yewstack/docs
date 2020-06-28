@@ -63,7 +63,7 @@ impl Component for Container {
 ```
 {% endcode %}
 
-{% hint style="info" %} Types for which you derive Properties must also implement Clone. This can be done by either using #[derive(Properties, Clone) or manually implementing Clone for your type. {% endhint %}
+{% hint style="info" %} Types for which you derive `Properties` must also implement `Clone`. This can be done by either using `#[derive(Properties, Clone)]` or manually implementing Clone for your type. {% endhint %}
 
 ## Nested Children with Props
 
@@ -109,4 +109,3 @@ impl Component for List {
 }
 ```
 {% endcode %}
-
