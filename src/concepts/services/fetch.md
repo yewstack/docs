@@ -171,7 +171,8 @@ impl Component for FetchServiceExample {
 
 Most browsers' developer tools have a "network" pane which can be used to inspect and view requests 
 browsers have made, including data such as request headers and the contents of responses. This can be
-a useful way to gain an insight into what is happening.
+a useful way to gain an insight into what requests are being made, the data being sent to the server
+as well as the return data from the server.
 
 ## Further reading
 * [The API documentation](https://docs.rs/yew/0.14.3/yew/services/fetch/index.html)
