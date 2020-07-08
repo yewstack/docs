@@ -1,10 +1,12 @@
 # The Fetch Service
 ## Introduction
-The fetch module can be used to make requests to a server. This allows a Yew application to connect to a backend and provide interactive functionality. 
+The fetch module can be used to make requests to a server. This allows a Yew application to connect 
+to a backend server and provide interactive functionality. 
 
 ## Making requests
 ### Building requests
-Yew has a struct `Request` (which comes from the `http` crate) that is used to 'build' requests before they can be dispatched to a server. The body type of the request must have the trait `Into<Text>`.
+Yew has a struct `Request` (which comes from the `http` crate) that is used to 'build' requests 
+before they can be dispatched to a server. The body type of the request must have the trait `Into<Text>`.
 ```rust
 use yew::services::fetch::Request;
 use yew::format::Nothing;
@@ -18,21 +20,22 @@ let post_request = Request::post("https://example.com/api/v1/post/something").he
 ```
 ### Dispatching requests
 The `FetchService` provides a binding to the browser's `fetch` API. Requests can be sent using either 
-`FetchService::fetch` or `FetchService::fetch_with_options` (`fetch_with_options` should be used where cookies need to 
+`FetchService::fetch` or `FetchService::fetch_with_options` (`fetch_with_options` should be used 
+where cookies need to 
 be sent in a request).
 
-`FetchService::fetch` accepts two parameters: a `Request` object and a `Callback`. The closure with which the callback 
-is constructed must take a single parameter of type `Response`. `Response` accepts a type argument – the type must 
-implement `From<Text>`.
+`FetchService::fetch` accepts two parameters: a `Request` object and a `Callback`. The closure with 
+which the callback is constructed must take a single parameter of type `Response`. `Response` accepts
+a type argument – the type must implement `From<Text>`.
 
-It's important that the `FetchTask` returned is kept alive until the request has finished – i.e. it should not be 
-dropped until the request has finsihed and a response has been obtained. If the `FetchTask` is dropped then the request 
-will be cancelled.
+It's important that the `FetchTask` returned is kept alive until the request has finished – i.e. it 
+should not be dropped until the request has finsihed and a response has been obtained. If the 
+`FetchTask` is dropped then the request will be cancelled.
 
 {% hint style="info" %}
-If you keep getting an error saying that "the operation was aborted" or "Error 408" this might be because the 
-[CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) of the website you are trying to access are 
-not set correctly.
+If you keep getting an error saying that "the operation was aborted" or "Error 408" this might be 
+because the [CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) of the website 
+you are trying to access are not set correctly.
 {% endhint %}
 
 ```rust 
@@ -166,10 +169,11 @@ impl Component for FetchServiceExample {
 
 ## Debugging the `FetchService`
 
-Most browser's developer tools have a "network" pane which can be used to inspect and view requests browsers have made, 
-including data such as request headers and the contents of responses. This can be a useful way to gain an insight into 
-what is happening.
+Most browsers' developer tools have a "network" pane which can be used to inspect and view requests 
+browsers have made, including data such as request headers and the contents of responses. This can be
+a useful way to gain an insight into what is happening.
 
 ## Further reading
 * [The API documentation](https://docs.rs/yew/0.14.3/yew/services/fetch/index.html)
-* The [dashboard](https://github.com/yewstack/yew/tree/master/examples/dashboard) and [npm_and_rest](https://github.com/yewstack/yew/tree/master/examples/web_sys/npm_and_rest) examples.
+* The [dashboard](https://github.com/yewstack/yew/tree/master/examples/dashboard) and 
+[npm_and_rest](https://github.com/yewstack/yew/tree/master/examples/web_sys/npm_and_rest) examples.
