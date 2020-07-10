@@ -1,3 +1,6 @@
+# THIS REPOSITORY HAS BEEN MERGED INTO https://github.com/yewstack/yew
+# PLEASE SUBMIT ALL PRs AND ISSUES THERE (NOT HERE)
+
 Building the book locally
 ---
 
